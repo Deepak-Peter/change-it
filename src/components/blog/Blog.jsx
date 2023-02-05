@@ -101,7 +101,7 @@ export default function Blog() {
                         height: 30,
                       }}
                     >
-                      N
+                      R
                     </Avatar>
                     <Typography variant="subtitle1">
                       By Jie Yan Song • Feb 4, 2023
