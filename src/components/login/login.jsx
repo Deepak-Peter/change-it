@@ -42,10 +42,10 @@ function Login() {
         .email(" username must be vaild")
         .required(" username is required"),
         password: Yup.string()
-        // .matches(
-        //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`#^(|{}"'@$!%&])[\d~#-}"!]{8,20}$/,
-        //   "Password format must match the standard password security guidelines. Password must be between 8 and 20 characters, contain an upper case letter, lower case letter, number, and special character."
-        // )
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`#^(|{}"'@$!%&])[\d~#-}"!]{8,20}$/,
+          "Password format must match the standard password security guidelines. Password must be between 8 and 20 characters, contain an upper case letter, lower case letter, number, and special character."
+        )
         .required("New Password is required"),
     }),
     onSubmit: async (values) => {
@@ -55,7 +55,7 @@ function Login() {
           username: values.username,
           password: values.password,
         };
-        if (values.username == "sample@gmail.com" && values.password == "P@ss123") {
+        if (values.username == "ravi@gmail.com" && values.password == "P@ssW0rd") {
           alert("login success");
           localStorage.setItem('isLoggedIn',true);
           window.location.reload();

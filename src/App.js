@@ -9,7 +9,7 @@ import { BlogCreate } from "./components/blog/blog-create/BlogCreate";
 import { Register } from "./components/register/Register";
 function App() {
   const user=localStorage.getItem('isLoggedIn');
-
+  debugger;
   return (
     <BrowserRouter>
      {user&&<TopBar/>}
