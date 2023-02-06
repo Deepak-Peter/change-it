@@ -20,7 +20,7 @@ function App() {
           <Route path="home" element={user?<Home />:<Login/>} />
           <Route path="profile" element={user?<Profile/>:<Login />} />
           <Route path="blog" element={user?<Blog />:<Login/>} />
-          <Route path="blogCreate" element={user?<BlogCreate />:<Login/>} />
+          <Route path="blog/blogCreate" element={user?<BlogCreate />:<Login/>} />
       </Routes>
     </BrowserRouter>
   );
