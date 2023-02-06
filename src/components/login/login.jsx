@@ -17,6 +17,8 @@ import {
 import {  Visibility, VisibilityOff } from "@mui/icons-material";
 import Dashboard from "../dashboard/Dashboard";
 // import Button from "./components/Button";
+import { Outlet, Link } from "react-router-dom";
+
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +57,8 @@ function Login() {
         };
         if (values.username == "sample@gmail.com" && values.password == "P@ss123") {
           alert("login success");
+          localStorage.setItem('isLoggedIn',true);
+          window.location.reload();
         }
         // postUser(regData);
       } catch (err) {
@@ -117,7 +121,7 @@ function Login() {
             variant="outlined"
             label="Password"
             name="password"
-            type="password"
+            type="text"
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.password}
@@ -134,9 +138,9 @@ function Login() {
                   edge="end"
                 >
                   {showPassword ? (
-                    <Visibility sx={{ color: "#6B7280" }} />
+                    <Visibility sx={{ color: "black" }} />
                   ) : (
-                    <VisibilityOff sx={{ color: "#6B7280" }} />
+                    <VisibilityOff sx={{ color: "black" }} />
                   )}
                 </IconButton>
               </InputAdornment>
@@ -145,28 +149,13 @@ function Login() {
           />
         </Box>
 
-        {/* <CustomInput
-            labelText="Email"
-            id="email"
-            formControlProps={{
-              fullWidth: true
-            }}
-            handleChange={this.handleChange}
-            type="text"
-          />
-          <CustomInput
-            labelText="Password"
-            id="password"
-            formControlProps={{
-              fullWidth: true
-            }}
-            handleChange={this.handleChange}
-            type="password"
-          /> */}
-
         <Button type="submit" color="primary" className="form__custom-button">
           Log in
         </Button>
+        <Typography>Don't have an account? </Typography>
+        <Link to="/register">
+        <Button>Sign up</Button>
+        </Link>
       </form>
     </div>
   );

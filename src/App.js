@@ -3,29 +3,24 @@ import Login from "./components/login/login";
 import Blog from "./components/blog/Blog";
 import Home from "./components/home/Home";
 import "./App.css";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Profile } from "./components/profile/Profile";
 import { BlogCreate } from "./components/blog/blog-create/BlogCreate";
+import { Register } from "./components/register/Register";
 function App() {
-  return (
-    // <div className="App">
-    // <TopBar/>
-    // <Login/>
-    // </div>
-    <BrowserRouter>
-      {/* <TopBar/> */}
-      <Routes>
-        <Route path="/" element={<TopBar />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="home" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blogCreate" element={<BlogCreate />} />
+  const user=localStorage.getItem('isLoggedIn');
 
-          {/* <Route path="contact" element={<Contact />} />
-        <Route path="*" element={<NoPage />} /> */}
-        </Route>
+  return (
+    <BrowserRouter>
+     {user&&<TopBar/>}
+      <Routes>
+          <Route exact path="/" element={user?<Home/>:<Login/>}/>
+          <Route path="login" element={user?<Home/>:<Login />} />
+          <Route path="register" element={user?<Home/>:<Register />} />
+          <Route path="home" element={user?<Home />:<Login/>} />
+          <Route path="profile" element={user?<Profile/>:<Login />} />
+          <Route path="blog" element={user?<Blog />:<Login/>} />
+          <Route path="blogCreate" element={user?<BlogCreate />:<Login/>} />
       </Routes>
     </BrowserRouter>
   );

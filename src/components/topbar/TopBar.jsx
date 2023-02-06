@@ -17,17 +17,30 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { Outlet, Link } from "react-router-dom";
 
-const pages = [
-  { name: "Home", link: "/home" },
-  { name: "Blog", link: "/blog" },
+const user=localStorage.getItem('isLoggedIn');
+const pages = user
+  ? [
+      { name: "Home", link: "/home" },
+      { name: "Blog", link: "/blog" },
+      { name: "Profile", link: "/profile" },
+      // { name: "Logout", link: "/logout" },
+    ]
+  : [
+      { name: "Home", link: "/home" },
+      { name: "About", link: "/about" },
+      { name: "Contact", link: "/contact" },
+      { name: "Login", link: "/login" },
+      { name: "Register", link: "/register" },
+
+
+    ];
+const settings = user? [
   { name: "Profile", link: "/profile" },
-];
-const settings = [
-  { name: "Profile", link: "/profile" },
-  { name: "Account", link: "/account" },
-  { name: "Dashboard", link: "/dashboard" },
+  // { name: "Account", link: "/account" },
+  // { name: "Dashboard", link: "/dashboard" },
   { name: "Logout", link: "/login" },
-];
+]:
+[];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -86,8 +99,13 @@ function TopBar() {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (ele) => {
+    debugger;
     setAnchorElUser(null);
+    if(ele=="Logout"){
+      localStorage.setItem('isLoggedIn',false);
+      window.location.reload();
+    }
   };
   //   return (
   //     <>
@@ -119,7 +137,7 @@ function TopBar() {
               variant="h6"
               noWrap
               component="a"
-              href="/login"
+              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -215,7 +233,7 @@ function TopBar() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Box sx={{ flexGrow: 0 }}>
+            {user && <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -240,13 +258,13 @@ function TopBar() {
               >
                 {settings.map((setting) => (
                   <Link to={`${setting.link}`}>
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting.name)}>
                       <Typography textAlign="center">{setting.name}</Typography>
                     </MenuItem>
                   </Link>
                 ))}
               </Menu>
-            </Box>
+            </Box>}
           </Toolbar>
         </Container>
       </AppBar>
