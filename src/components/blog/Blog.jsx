@@ -11,6 +11,7 @@ import {
 import React from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Link } from "react-router-dom";
 export default function Blog() {
   return (
     <Box
@@ -41,10 +42,12 @@ export default function Blog() {
           }}
         >
           <Typography variant="subtitle1">Hello, Admin</Typography>
-          <Box href="/blog/new" passHref>
-            <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
-              New Post
-            </Button>
+          <Box>
+            <Link to="blogCreate">
+              <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
+                New Post
+              </Button>
+            </Link>
           </Box>
         </Card>
         <Typography variant="h4">Recent Articles</Typography>
