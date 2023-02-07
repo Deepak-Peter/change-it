@@ -9,12 +9,9 @@ import {
   Typography,
   TextField,
   Box,
-  Divider,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import Dashboard from "../dashboard/Dashboard";
-// import Button from "./components/Button";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
 
 function Login() {
@@ -45,16 +42,18 @@ function Login() {
     }),
     onSubmit: async (values) => {
       try {
-        const regData = {
-          username: values.username,
-          password: values.password,
-        };
         if (
-          values.username == "ravi@gmail.com" &&
-          values.password == "P@ssW0rd"
+          values.username === "ravi@gmail.com" &&
+          values.password === "P@ssW0rd"
         ) {
           alert("login success");
-          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isLoggedIn", "user");
+          window.location.reload();
+        } else if (
+          values.username === "admin@gmail.com" &&
+          values.password === "P@ssW0rd"
+        ) {
+          localStorage.setItem("isLoggedIn", "admin");
           window.location.reload();
         }
         // postUser(regData);
@@ -70,9 +69,6 @@ function Login() {
   // const [email,setEmail]=useState();
   // const [password,setPassword]=useState();
 
-  const handleChange = () => {
-    // this.setState({ [e.currentTarget.id]: e.currentTarget.value });
-  };
 
   return (
     <Box sx={{ display: "flex" }}>

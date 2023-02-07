@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TopBar from "../topbar/TopBar";
-import Login from "../login/login";
 import Blog from "../blog/Blog";
 import Home from "../home/Home";
 

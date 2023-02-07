@@ -1,7 +1,5 @@
-import  { FC } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
-import { DropzoneOptions } from 'react-dropzone';
 import {
   Box,
   Button,
@@ -14,16 +12,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
-// import { Duplicate as DuplicateIcon } from '../icons/duplicate';
-// import { X as XIcon } from '../icons/x';
-// import { bytesToSize } from '../utils/bytes-to-size';
 import ControlPointDuplicateIcon from '@mui/icons-material/ControlPointDuplicate';
-// interface FileDropzoneProps extends DropzoneOptions {
-//   files?: any[];
-//   onRemove?: (file: any) => void;
-//   onRemoveAll?: () => void;
-//   onUpload?: () => void;
-// }
 
 export const FileDropzone = (props) => {
   const {

@@ -18,20 +18,21 @@ import InputBase from "@mui/material/InputBase";
 import { Outlet, Link } from "react-router-dom";
 
 const user = localStorage.getItem("isLoggedIn");
-const pages = user
-  ? [
-      { name: "Home", link: "/home" },
-      { name: "Blog", link: "/blog" },
-      { name: "Profile", link: "/profile" },
-      // { name: "Logout", link: "/logout" },
-    ]
-  : [
-      { name: "Home", link: "/home" },
-      { name: "About", link: "/about" },
-      { name: "Contact", link: "/contact" },
-      { name: "Login", link: "/login" },
-      { name: "Register", link: "/register" },
-    ];
+const pages =
+  user === "admin"
+    ? [
+        { name: "Home", link: "/home" },
+        { name: "Blog", link: "/blog" },
+        { name: "Pending", link: "/pending" },
+        { name: "Profile", link: "/profile" },
+      ]
+    : [
+        { name: "Home", link: "/home" },
+        { name: "About", link: "/about" },
+        { name: "Contact", link: "/contact" },
+        { name: "Login", link: "/login" },
+        { name: "Register", link: "/register" },
+      ];
 const settings = user
   ? [
       { name: "Profile", link: "/profile" },
@@ -101,7 +102,7 @@ function TopBar() {
   const handleCloseUserMenu = (ele) => {
     debugger;
     setAnchorElUser(null);
-    if (ele == "Logout") {
+    if (ele === "Logout") {
       localStorage.removeItem("isLoggedIn");
       window.location.reload();
     }
