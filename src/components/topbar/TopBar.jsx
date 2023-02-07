@@ -120,7 +120,7 @@ function TopBar() {
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/blog"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },

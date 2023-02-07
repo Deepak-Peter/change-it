@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <Box
+    <Container
       component="main"
       sx={{
         flexGrow: 1,
@@ -206,6 +206,6 @@ export default function Home() {
           </Grid>
         </Box>
       </Container>
-    </Box>
+    </Container>
   );
 }

@@ -12,12 +12,21 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import {FileDropzone} from "../file-dropzone/file-dropzone";
+import { fileToBase64 } from '../../../utils/file-to-base64';
 
 export const BlogCreate = () => {
   const [cover, setCover] = useState("/static/mock-images/covers/cover_4.jpeg");
 
+  const handleDropCover = async ([file]) => {
+    const data = await fileToBase64(file) ;
+    setCover(data);
+  };
+  const handleRemove = () => {
+    setCover(null);
+  };
   return (
-    <Box
+    <Container
       component="main"
       sx={{
         flexGrow: 1,
@@ -134,26 +143,26 @@ export const BlogCreate = () => {
               </Box>
             )}
             <Button
-              // onClick={handleRemove}
+              onClick={handleRemove}
               sx={{ mt: 3 }}
               disabled={!cover}
             >
               Remove photo
             </Button>
-            {/* <Box sx={{ mt: 3 }}>
+            <Box sx={{ mt: 3 }}>
             <FileDropzone
               accept="image/*"
               maxFiles={1}
               onDrop={handleDropCover}
             />
-          </Box> */}
+          </Box>
           </CardContent>
         </Card>
         <Card sx={{ mt: 4 }}>
           <CardContent>
-            <Typography variant="h6">Content</Typography>
+            <Typography variant="h6" paddingBottom={2}>Content</Typography>
 
-            <TextField fullWidth row={10} variant="outlined" />
+            <TextField fullWidth rows={5} variant="outlined"  placeholder="write something" multiline/>
           </CardContent>
         </Card>
         <Card sx={{ mt: 4 }}>
@@ -184,6 +193,6 @@ export const BlogCreate = () => {
           </Link>
         </Box>
       </Container>
-    </Box>
+    </Container>
   );
 };

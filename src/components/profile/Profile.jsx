@@ -14,7 +14,7 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { ProfileSettings } from "./profile-left/profile-settings/ProfileSettings";
 export const Profile = () => {
   return (
-    <Box sx={{ p: 3 }}>
+    <Container sx={{ p: 3 }}>
       <Box>
         <Box
           style={{ backgroundImage: `url(/img/profile-bg.jpg)` }}
@@ -82,6 +82,6 @@ export const Profile = () => {
           </Grid>
         </Grid>
       </Box>
-    </Box>
+    </Container>
   );
 };
