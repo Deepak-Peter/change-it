@@ -17,7 +17,7 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { Outlet, Link } from "react-router-dom";
 
-const user=localStorage.getItem('isLoggedIn');
+const user = localStorage.getItem("isLoggedIn");
 const pages = user
   ? [
       { name: "Home", link: "/home" },
@@ -31,16 +31,15 @@ const pages = user
       { name: "Contact", link: "/contact" },
       { name: "Login", link: "/login" },
       { name: "Register", link: "/register" },
-
-
     ];
-const settings = user? [
-  { name: "Profile", link: "/profile" },
-  // { name: "Account", link: "/account" },
-  // { name: "Dashboard", link: "/dashboard" },
-  { name: "Logout", link: "/login" },
-]:
-[];
+const settings = user
+  ? [
+      { name: "Profile", link: "/profile" },
+      // { name: "Account", link: "/account" },
+      // { name: "Dashboard", link: "/dashboard" },
+      { name: "Logout", link: "/login" },
+    ]
+  : [];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -102,8 +101,8 @@ function TopBar() {
   const handleCloseUserMenu = (ele) => {
     debugger;
     setAnchorElUser(null);
-    if(ele=="Logout"){
-      localStorage.removeItem('isLoggedIn');
+    if (ele == "Logout") {
+      localStorage.removeItem("isLoggedIn");
       window.location.reload();
     }
   };
@@ -112,8 +111,11 @@ function TopBar() {
     <>
       <AppBar position="static">
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Toolbar
+            disableGutters
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
             <Typography
               variant="h6"
               noWrap
@@ -129,7 +131,7 @@ function TopBar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              BLOGZ
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -162,7 +164,7 @@ function TopBar() {
                 }}
               >
                 {pages.map((page) => (
-                  <Link to={`${page.link}`}>
+                  <Link to={`${page.link}`} style={{ textDecoration: "none" }}>
                     <MenuItem
                       key={page.name}
                       //  onClick={handleCloseNavMenu(page)}
@@ -190,22 +192,22 @@ function TopBar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              BLOGZ
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
-                <Link to={`${page.link}`} sx={{ textDecoration: "none" }}>
+                <Link to={`${page.link}`} style={{ textDecoration: "none" }}>
                   <Button
                     key={page.name}
                     // onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: "white" }}
                   >
                     {page.name}
                   </Button>
                 </Link>
               ))}
             </Box>
-            <Search>
+            <Search sx={{ height: "40px", borderRadius: 2 }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -214,38 +216,48 @@ function TopBar() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            {user && <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
+            {user && (
+              <Box sx={{ flexGrow: 0, ml: 2 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" sx={{ width: 30, height: 30 }} />
+                  </IconButton>
+                </Tooltip>
 
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <Link to={`${setting.link}`}>
-                    <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting.name)}>
-                      <Typography textAlign="center">{setting.name}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
-            </Box>}
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <Link
+                      to={`${setting.link}`}
+                      style={{ textDecoration: "none", color: "#696969" }}
+                    >
+                      <MenuItem
+                        key={setting}
+                        onClick={() => handleCloseUserMenu(setting.name)}
+                      >
+                        <Typography variant="body1" textAlign="center">
+                          {setting.name}
+                        </Typography>
+                      </MenuItem>
+                    </Link>
+                  ))}
+                </Menu>
+              </Box>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

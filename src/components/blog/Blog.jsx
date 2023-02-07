@@ -18,39 +18,31 @@ export default function Blog() {
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8,
+        py: 3,
+        px: 3,
       }}
     >
-      <Container>
-        <Box href="/dashboard" passHref>
-          <Button component="a">Dashboard</Button>
-        </Box>
-        <Typography variant="h3" sx={{ mt: 3 }}>
-          Blog Platform
-        </Typography>
-        <Card
+      <Box>
+        <Box
           sx={{
-            alignItems: "center",
-            borderRadius: 1,
             display: "flex",
             justifyContent: "space-between",
-            boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-            mb: 8,
-            mt: 6,
-            px: 3,
-            py: 2,
+            alignItems: "center",
+            mb: 6,
           }}
         >
-          <Typography variant="subtitle1">Hello, Admin</Typography>
+          <Typography variant="h3" sx={{ mt: 3 }}>
+            Blog Platform
+          </Typography>
           <Box>
-            <Link to="blogCreate">
+            <Link to="blogCreate" style={{ textDecoration: "none" }}>
               <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
                 New Post
               </Button>
             </Link>
           </Box>
-        </Card>
-        <Typography variant="h4">Recent Articles</Typography>
+        </Box>
+        <Typography variant="h5">Recent Articles</Typography>
         <Typography color="textSecondary" variant="subtitle1">
           Discover the latest news, tips and user research insights from Acme.
         </Typography>
@@ -198,7 +190,7 @@ export default function Blog() {
             Older posts
           </Button>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 }
