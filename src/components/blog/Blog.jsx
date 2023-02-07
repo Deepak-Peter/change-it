@@ -58,9 +58,11 @@ export default function Blog() {
               sx={{
                 boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
                 borderRadius: 2,
+                cursor:"pointer"
               }}
             >
-              <Box>
+              <Link to={"/blog/1"}>
+              <Box >
                 <Box
                   sx={{
                     backgroundImage: "url(/img/business-large.jpg)",
@@ -109,6 +111,7 @@ export default function Blog() {
                   </Box>
                 </Box>
               </Box>
+              </Link>
             </Card>
           </Grid>
           <Grid item lg={6} md={6} xs={12}>

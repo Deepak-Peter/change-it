@@ -55,8 +55,12 @@ export default function Home() {
                 sx={{
                   boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
                   borderRadius: 2,
+                  cursor:"pointer"
                 }}
+
               >
+                <Link to={"/blog/1"}>
+                
                 <Box>
                   <Box
                     sx={{
@@ -99,6 +103,7 @@ export default function Home() {
                     </Box>
                   </Box>
                 </Box>
+                </Link>
               </Card>
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
