@@ -23,7 +23,7 @@ const pages =
     ? [
         { name: "Home", link: "/home" },
         { name: "Blog", link: "/blog" },
-        { name: "Pending", link: "/pending" },
+        { name: "Pending Requests", link: "/pending" },
         { name: "Profile", link: "/profile" },
       ]
     : [

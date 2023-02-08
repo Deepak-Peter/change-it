@@ -77,7 +77,7 @@ export const BlogCreate = () => {
                 }}
                 variant="contained"
               >
-                Publish changes
+               Submit
               </Button>
             </Link>
             {/* <IconButton>
