@@ -29,6 +29,8 @@ export default function Blog() {
             justifyContent: "space-between",
             alignItems: "center",
             mb: 6,
+            alignItems: "center",
+            mb: 6,
           }}
         >
           <Typography variant="h3" sx={{ mt: 3 }}>

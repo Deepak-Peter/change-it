@@ -10,14 +10,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import {FileDropzone} from "../file-dropzone/file-dropzone";
-import { fileToBase64 } from '../../../utils/file-to-base64';
+import { FileDropzone } from "../file-dropzone/file-dropzone";
+import { fileToBase64 } from "../../../utils/file-to-base64";
 
 export const BlogCreate = () => {
   const [cover, setCover] = useState("/static/mock-images/covers/cover_4.jpeg");
 
   const handleDropCover = async ([file]) => {
-    const data = await fileToBase64(file) ;
+    const data = await fileToBase64(file);
     setCover(data);
   };
   const handleRemove = () => {
@@ -140,27 +140,31 @@ export const BlogCreate = () => {
                 </Typography>
               </Box>
             )}
-            <Button
-              onClick={handleRemove}
-              sx={{ mt: 3 }}
-              disabled={!cover}
-            >
+            <Button onClick={handleRemove} sx={{ mt: 3 }} disabled={!cover}>
               Remove photo
             </Button>
             <Box sx={{ mt: 3 }}>
-            <FileDropzone
-              accept="image/*"
-              maxFiles={1}
-              onDrop={handleDropCover}
-            />
-          </Box>
+              <FileDropzone
+                accept="image/*"
+                maxFiles={1}
+                onDrop={handleDropCover}
+              />
+            </Box>
           </CardContent>
         </Card>
         <Card sx={{ mt: 4 }}>
           <CardContent>
-            <Typography variant="h6" paddingBottom={2}>Content</Typography>
+            <Typography variant="h6" paddingBottom={2}>
+              Content
+            </Typography>
 
-            <TextField fullWidth rows={5} variant="outlined"  placeholder="write something" multiline/>
+            <TextField
+              fullWidth
+              rows={5}
+              variant="outlined"
+              placeholder="write something"
+              multiline
+            />
           </CardContent>
         </Card>
         <Card sx={{ mt: 4 }}>
