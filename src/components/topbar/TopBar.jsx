@@ -30,8 +30,6 @@ const pages =
         { name: "Home", link: "/home" },
         { name: "About", link: "/about" },
         { name: "Contact", link: "/contact" },
-        { name: "Login", link: "/login" },
-        { name: "Register", link: "/register" },
       ];
 const settings = user
   ? [
