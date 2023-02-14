@@ -9,9 +9,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 export const BlogDetails = () => {
+  const params = useParams();
+  debugger;
+  useEffect(() => {
+    fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${params.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <div>
       {" "}

@@ -8,7 +8,7 @@ import { Profile } from "./components/profile/Profile";
 import { BlogCreate } from "./components/blog/blog-create/BlogCreate";
 import { Register } from "./components/register/Register";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { BlogDetails } from "./components/blog/[blog-id]";
+import { BlogDetails } from "./components/blog/[id]";
 
 function App() {
   const user = localStorage.getItem("isLoggedIn");
