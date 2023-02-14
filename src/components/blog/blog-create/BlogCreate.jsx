@@ -77,7 +77,7 @@ export const BlogCreate = () => {
                 }}
                 variant="contained"
               >
-               Submit
+                Submit
               </Button>
             </Link>
             {/* <IconButton>
@@ -165,19 +165,6 @@ export const BlogCreate = () => {
               placeholder="write something"
               multiline
             />
-          </CardContent>
-        </Card>
-        <Card sx={{ mt: 4 }}>
-          <CardContent>
-            <Grid container spacing={3}>
-              <Grid item xs={12} lg={4}>
-                <Typography variant="h6">Meta</Typography>
-              </Grid>
-              <Grid item xs={12} lg={8}>
-                <TextField fullWidth label="SEO title" name="title" />
-                <TextField fullWidth sx={{ mt: 3 }} label="SEO description" />
-              </Grid>
-            </Grid>
           </CardContent>
         </Card>
         <Box
