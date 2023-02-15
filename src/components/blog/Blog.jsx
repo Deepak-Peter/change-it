@@ -13,38 +13,39 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 export default function Blog() {
-
-  useEffect(()=>{
-    fetch('https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30',
+  useEffect(() => {
+    fetch(
+      "https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30"
     )
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-  },[])
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
 
-  useEffect(()=>{
-    fetch('https://zpworkshopapis.netlify.app/.netlify/functions/blog',
-    // {
-    //   method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    //   mode: 'no-cors', // no-cors, *cors, same-origin
-    //   // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //   // credentials: 'same-origin', // include, *same-origin, omit
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //     // 'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    //   // redirect: 'follow', // manual, *follow, error
-    //   // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    // }
+  useEffect(() => {
+    fetch(
+      "https://zpworkshopapis.netlify.app/.netlify/functions/blog"
+      // {
+      //   method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      //   mode: 'no-cors', // no-cors, *cors, same-origin
+      //   // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      //   // credentials: 'same-origin', // include, *same-origin, omit
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //     // 'Content-Type': 'application/x-www-form-urlencoded',
+      //   },
+      //   // redirect: 'follow', // manual, *follow, error
+      //   // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      // }
     )
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-  },[])
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <Container
       component="main"
       sx={{
         flexGrow: 1,
-        py: 3,
+        py: 4,
         px: 3,
       }}
     >
@@ -54,19 +55,16 @@ export default function Blog() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 6,
+            mb: 4,
           }}
         >
-          <Typography variant="h3" sx={{ mt: 3 }}>
-            Blog Platform
-          </Typography>
-          <Box>
-            <Link to="blogCreate" style={{ textDecoration: "none" }}>
-              <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
-                New Post
-              </Button>
-            </Link>
-          </Box>
+          <Typography variant="h3">Blog Platform</Typography>
+
+          <Link to="blogCreate" style={{ textDecoration: "none" }}>
+            <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
+              New Post
+            </Button>
+          </Link>
         </Box>
         <Typography variant="h5">Recent Articles</Typography>
         <Typography color="textSecondary" variant="subtitle1">
