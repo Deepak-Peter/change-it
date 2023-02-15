@@ -17,7 +17,7 @@ export const Profile = () => {
     <Container sx={{ p: 3 }}>
       <Box>
         <Box
-          style={{ backgroundImage: `url(/img/profile-bg.jpg)` }}
+          style={{ backgroundImage: `url(/img/profileBG.jpg)` }}
           sx={{
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -40,7 +40,7 @@ export const Profile = () => {
           }}
         >
           <Avatar
-            src="/img/profile-bg.jpg"
+            src="/img/Zeropixels-1.jpg"
             sx={{
               height: 64,
               width: 64,
@@ -48,9 +48,9 @@ export const Profile = () => {
           />
           <Box sx={{ ml: 2 }}>
             <Typography color="textSecondary" variant="overline">
-              profile.bio
+              profile bio
             </Typography>
-            <Typography variant="h6">profile.name</Typography>
+            <Typography variant="h5">Zero Pixels</Typography>
           </Box>
           <Box sx={{ flexGrow: 1 }} />
           <Box
@@ -61,7 +61,7 @@ export const Profile = () => {
               },
             }}
           >
-            <Button sx={{ ml: 2 }} variant="outlined">
+            <Button sx={{ ml: 2 }} variant="outlined" color="error">
               Change Picture
             </Button>
           </Box>

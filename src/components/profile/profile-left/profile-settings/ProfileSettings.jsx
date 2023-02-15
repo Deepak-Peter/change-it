@@ -56,40 +56,6 @@ export const ProfileSettings = () => {
                 <TextField fullWidth label="Phone Number" name="phone" />
               </Grid>
               <Grid item md={6} xs={12}>
-                <Autocomplete
-                  id="country-select-demo"
-                  options={countries}
-                  autoHighlight
-                  getOptionLabel={(option) => option.label}
-                  renderOption={(props, option) => (
-                    <Box
-                      component="li"
-                      sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                      {...props}
-                    >
-                      <img
-                        loading="lazy"
-                        width="20"
-                        src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                        srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                        alt=""
-                      />
-                      {option.label} ({option.code}) +{option.phone}
-                    </Box>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Choose a country"
-                      inputProps={{
-                        ...params.inputProps,
-                        autoComplete: "new-password", // disable autocomplete and autofill
-                      }}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item md={6} xs={12}>
                 <TextField fullWidth label="State/Region" name="state" />
               </Grid>
               <Grid item md={6} xs={12}>
@@ -125,7 +91,7 @@ export const ProfileSettings = () => {
               p: 2,
             }}
           >
-            <Button color="primary" type="submit" variant="contained">
+            <Button type="submit" variant="contained" sx={{ boxShadow: 0 }}>
               Update Profile
             </Button>
           </CardActions>

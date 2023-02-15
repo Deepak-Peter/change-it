@@ -13,11 +13,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 export default function Blog() {
+  const [id, setId] = useState();
 
-  const [id,setId]=useState();
-
-  useEffect(()=>{
-    fetch('https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30',
+  useEffect(() => {
+    fetch(
+      "https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30"
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
@@ -39,11 +39,11 @@ export default function Blog() {
       //   // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       // }
     )
-  .then((response) => response.json())
-  .then((data) => {
-    setId(data.title1.id);
-  });
-  },[])
+      .then((response) => response.json())
+      .then((data) => {
+        setId(data.title1.id);
+      });
+  }, []);
   return (
     <Container
       component="main"
@@ -65,7 +65,12 @@ export default function Blog() {
           <Typography variant="h3">Blog Platform</Typography>
 
           <Link to="blogCreate" style={{ textDecoration: "none" }}>
-            <Button component="a" variant="contained" sx={{ boxShadow: 0 }}>
+            <Button
+              component="a"
+              variant="contained"
+              color="error"
+              sx={{ boxShadow: 0 }}
+            >
               New Post
             </Button>
           </Link>
@@ -89,7 +94,10 @@ export default function Blog() {
                 cursor: "pointer",
               }}
             >
-              <Link to={`/blog/${id}`} style={{ textDecoration: "none" }}>
+              <Link
+                to={`/blog/${id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 <Box>
                   <Box
                     sx={{
@@ -102,7 +110,7 @@ export default function Blog() {
                   />
                 </Box>
                 <Box sx={{ p: 2 }}>
-                  <Typography variant="h6" color="primary">
+                  <Typography variant="h6">
                     Why I Still Lisp, and You Should Too
                   </Typography>
                   <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
@@ -120,8 +128,8 @@ export default function Blog() {
                     <Box sx={{ display: "flex", columnGap: 1 }}>
                       <Avatar
                         sx={{
-                          background:
-                            "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                          background: "#fc818e",
+                          // "#fc818e",
                           width: 30,
                           height: 30,
                         }}
@@ -179,8 +187,7 @@ export default function Blog() {
                   <Box sx={{ display: "flex", columnGap: 1 }}>
                     <Avatar
                       sx={{
-                        background:
-                          "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                        background: "#fc818e",
                         width: 30,
                         height: 30,
                       }}
@@ -237,8 +244,7 @@ export default function Blog() {
                   <Box sx={{ display: "flex", columnGap: 1 }}>
                     <Avatar
                       sx={{
-                        background:
-                          "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                        background: "#fc818e",
                         width: 30,
                         height: 30,
                       }}
@@ -273,6 +279,7 @@ export default function Blog() {
             Newer
           </Button>
           <Button
+            color="error"
             endIcon={<ArrowForwardIcon fontSize="small" />}
             sx={{ ml: 1 }}
           >

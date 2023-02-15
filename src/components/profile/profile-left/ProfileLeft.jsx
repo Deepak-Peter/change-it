@@ -25,7 +25,16 @@ export const ProfileLeft = () => {
         <CardHeader title="Profile Progress" />
         <Divider />
         <CardContent>
-          <LinearProgress value={60} variant="determinate" />
+          <LinearProgress
+            color="error"
+            value={60}
+            variant="determinate"
+            sx={{
+              "&.MuiLinearProgress-root": {
+                backgroundColor: "#d6d4d4",
+              },
+            }}
+          />
           <Box sx={{ mt: 2 }}>
             <Typography color="textSecondary" variant="subtitle2">
               60% Set Up Complete
@@ -96,7 +105,7 @@ export const ProfileLeft = () => {
                     <Typography variant="subtitle2">
                       Lives in{" "}
                       <Link color="textPrimary" href="#" variant="subtitle2">
-                        Bucharest
+                        Kochi
                       </Link>
                     </Typography>
                   }
@@ -104,7 +113,7 @@ export const ProfileLeft = () => {
                     <Typography color="textSecondary" variant="body2">
                       Originally from{" "}
                       <Link color="textSecondary" href="#" variant="body2">
-                        Rm. Valcea
+                        Kochi
                       </Link>
                     </Typography>
                   }
@@ -117,7 +126,7 @@ export const ProfileLeft = () => {
                 <ListItemText
                   primary={
                     <Typography variant="subtitle2">
-                      anika.visser@zero-pixels.com
+                      admin@zero-pixels.com
                     </Typography>
                   }
                 />

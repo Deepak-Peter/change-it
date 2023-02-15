@@ -74,8 +74,7 @@ export default function Home() {
                       <Box sx={{ display: "flex", columnGap: 1 }}>
                         <Avatar
                           sx={{
-                            background:
-                              "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                            background: "#fc818e",
                             width: 30,
                             height: 30,
                           }}
@@ -156,8 +155,7 @@ export default function Home() {
                       <Box sx={{ display: "flex", columnGap: 1 }}>
                         <Avatar
                           sx={{
-                            background:
-                              "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                            background: "#fc818e",
                             width: 30,
                             height: 30,
                           }}
@@ -229,8 +227,7 @@ export default function Home() {
                       <Box sx={{ display: "flex", columnGap: 1 }}>
                         <Avatar
                           sx={{
-                            background:
-                              "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                            background: "#fc818e",
                             width: 30,
                             height: 30,
                           }}

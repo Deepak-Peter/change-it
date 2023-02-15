@@ -108,30 +108,44 @@ function TopBar() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: "#969595" }}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters
             sx={{ display: "flex", alignItems: "center" }}
           >
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/blog"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
+
+            <Link
+              to="/blog"
+              style={{
                 textDecoration: "none",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              BLOGZ
-            </Typography>
+              <Box
+                component="img"
+                src="/img/main-logo.png"
+                sx={{ width: "30px", mr: 1 }}
+              />
+              <Typography
+                variant="h6"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                BLOGZ
+              </Typography>
+            </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton

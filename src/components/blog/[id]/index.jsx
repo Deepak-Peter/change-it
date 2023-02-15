@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 export const BlogDetails = () => {
-  const [data,setData]=useState();
+  const [data, setData] = useState();
   const params = useParams();
   useEffect(() => {
     fetch(
@@ -70,8 +70,7 @@ export const BlogDetails = () => {
               <Box sx={{ display: "flex", columnGap: 1 }}>
                 <Avatar
                   sx={{
-                    background:
-                      "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                    background: "#fc818e",
                     width: 30,
                     height: 30,
                   }}
@@ -148,8 +147,7 @@ export const BlogDetails = () => {
               <Box sx={{ display: "flex" }}>
                 <Avatar
                   sx={{
-                    background:
-                      "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                    background: "#fc818e",
                     width: 40,
                     height: 40,
                   }}
@@ -181,8 +179,7 @@ export const BlogDetails = () => {
               <Box sx={{ display: "flex" }}>
                 <Avatar
                   sx={{
-                    background:
-                      "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                    background: "#fc818e",
                     width: 40,
                     height: 40,
                   }}
@@ -214,8 +211,7 @@ export const BlogDetails = () => {
               <Box sx={{ display: "flex" }}>
                 <Avatar
                   sx={{
-                    background:
-                      "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
+                    background: "#fc818e",
                     width: 40,
                     height: 40,
                   }}
