@@ -12,11 +12,12 @@ import {
 import { fileToBase64 } from "../../../utils/file-to-base64";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export const BlogCreate = () => {
   const params = useParams();
   const [cover, setCover] = useState("/static/mock-images/covers/cover_4.jpeg");
-
+  const [img,setImg]=useState();
   const handleDropCover = async ([file]) => {
     const data = await fileToBase64(file);
     setSelectedImage(data);
@@ -28,11 +29,55 @@ export const BlogCreate = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
+  const onSubmit=async()=>{
+    // axios
+    // .post(`http://localhost:9000/.netlify/functions/blog`,{
+    //   title: 'Blog Sample',
+    //   category: 'sample'
+    // })
+    // .then((res) => setData(res.data))
+    // .catch((err) => console.log(err, "it has an error"));
+    const data={
+        title: 'Y I still exist',
+      category: 'sample',
+      imagestr:img,
+      content:[
+        'demo',
+        'smaple created for blog p'
+      ],
+      signature:['Kalidas M'],
+    }
+
+    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog",{
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      // mode: 'cors', // no-cors, *cors, same-origin
+      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: 'same-origin', // include, *same-origin, omit
+      // headers: {
+      //   'Content-Type': 'application/json'
+      //   // 'Content-Type': 'application/x-www-form-urlencoded',
+      // },
+      // redirect: 'follow', // manual, *follow, error
+      // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      // setBlogs(data);
+    });
+  }
+
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
     }
   }, [selectedImage]);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+ 
+  }, []);
 
   return (
     <Container
@@ -117,7 +162,16 @@ export const BlogCreate = () => {
                   type="file"
                   id="select-image"
                   style={{ display: "none" }}
-                  onChange={(e) => setSelectedImage(e.target.files[0])}
+                  onChange={(e) =>{
+                    debugger;
+                    var reader = new FileReader();
+                    reader.readAsDataURL(e.target.files[0]);
+                    console.log(reader,'readre')
+                    reader.onload = () => {
+                      console.log(reader.result); //base64encoded string
+                      setImg(reader.result)
+                    };
+                     setSelectedImage(e.target.files[0])}}
                 />
                 <label htmlFor="select-image">
                   <Button variant="contained" color="primary" component="span">
@@ -176,7 +230,7 @@ export const BlogCreate = () => {
               Cancel
             </Button>
           </Link>
-          <Link href="/blog/1" passHref style={{ textDecoration: "none" }}>
+          <Link  passHref style={{ textDecoration: "none" }}>
             <Button
               component="a"
               sx={{
@@ -187,6 +241,7 @@ export const BlogCreate = () => {
                 mr: 2,
               }}
               variant="contained"
+              onClick={onSubmit}
             >
               Submit
             </Button>

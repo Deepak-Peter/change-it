@@ -83,6 +83,22 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function TopBar() {
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [backend,setBackend]=React.useState();
+
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = (state) => {
+  //   if(state==="Hard Coded")
+  //     setBackend(false);
+  //   else
+  //     setBackend(true);
+  //   setAnchorEl(null);
+  // };
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -271,6 +287,30 @@ function TopBar() {
                 </Menu>
               </Box>
             )}
+              {/* <div>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        sx={{color:"white"}}
+      >
+        Call{backend?"Using API":"NOt using api"}
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        // onClose={handleClose('nj')}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={()=>handleClose('Hard Coded')}>Not using API </MenuItem>
+        <MenuItem onClick={()=>handleClose('Using API')}>Using API </MenuItem>
+      </Menu>
+    </div> */}
           </Toolbar>
         </Container>
       </AppBar>

@@ -15,16 +15,19 @@ import React, { useEffect, useState } from "react";
 export const BlogDetails = () => {
   const [data, setData] = useState();
   const params = useParams();
-  useEffect(() => {
-    fetch(
+
+  const getDetails = async () => {
+    await fetch(
       `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${params.id}`
     )
       .then((response) => response.json())
       .then((data) => {
         setData(data);
       });
+  };
+  useEffect(() => {
+    getDetails();
   }, []);
-  debugger;
   return (
     <div>
       {" "}
@@ -53,7 +56,7 @@ export const BlogDetails = () => {
 
           <Box sx={{ mb: 4 }}>
             <Typography variant="h3" color="primary" sx={{ mb: 2 }}>
-              {data.title}
+              title
             </Typography>
             <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
               Aliquam dapibus elementum nulla at malesuada. Ut mi nisl, aliquet
