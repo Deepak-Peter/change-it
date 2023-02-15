@@ -12,7 +12,6 @@ import {
 import { fileToBase64 } from "../../../utils/file-to-base64";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 export const BlogCreate = () => {
   const params = useParams();
