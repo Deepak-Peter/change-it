@@ -43,7 +43,7 @@ function App() {
             path="blog/blogCreate"
             element={user ? <BlogCreate /> : <Login />}
           />
-          <Route path="blog/1" element={user ? <BlogDetails /> : <Login />} />
+          <Route path="blog/:id" element={user ? <BlogDetails /> : <Login />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

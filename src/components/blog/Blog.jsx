@@ -8,14 +8,16 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 export default function Blog() {
-  useEffect(() => {
-    fetch(
-      "https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30"
+
+  const [id,setId]=useState();
+
+  useEffect(()=>{
+    fetch('https://zpworkshopapis.netlify.app/.netlify/functions/blog/63e49318457ce6bd7ad4fc30',
     )
       .then((response) => response.json())
       .then((data) => console.log(data));
@@ -37,9 +39,11 @@ export default function Blog() {
       //   // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
       // }
     )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
+  .then((response) => response.json())
+  .then((data) => {
+    setId(data.title1.id);
+  });
+  },[])
   return (
     <Container
       component="main"
@@ -85,7 +89,7 @@ export default function Blog() {
                 cursor: "pointer",
               }}
             >
-              <Link to={"/blog/1"} style={{ textDecoration: "none" }}>
+              <Link to={`/blog/${id}`} style={{ textDecoration: "none" }}>
                 <Box>
                   <Box
                     sx={{

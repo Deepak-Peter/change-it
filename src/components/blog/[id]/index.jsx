@@ -13,15 +13,18 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 export const BlogDetails = () => {
+  const [data,setData]=useState();
   const params = useParams();
-  debugger;
   useEffect(() => {
     fetch(
       `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${params.id}`
     )
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setData(data);
+      });
   }, []);
+  debugger;
   return (
     <div>
       {" "}
@@ -50,7 +53,7 @@ export const BlogDetails = () => {
 
           <Box sx={{ mb: 4 }}>
             <Typography variant="h3" color="primary" sx={{ mb: 2 }}>
-              Why I Still Lisp, and You Should Too
+              {data.title}
             </Typography>
             <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
               Aliquam dapibus elementum nulla at malesuada. Ut mi nisl, aliquet
