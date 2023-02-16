@@ -81,7 +81,8 @@ export default function Blog() {
         >
           {blogs ? (
             blogs?.reverse().map((ele) => {
-              return <BlogGrid ele={ele} />;
+              if (ele.approved) return <BlogGrid ele={ele} />;
+              else return <></>;
             })
           ) : (
             <Box

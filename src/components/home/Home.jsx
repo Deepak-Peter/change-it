@@ -9,14 +9,30 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import React, { useEffect, useState } from "react";
+import { HomeAdminGrid } from "./HomeAdminGrid";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 export default function Home() {
   const user = localStorage.getItem("isLoggedIn");
+  const [blogs, setBlogs] = useState();
+
+  const getBlogs = async () => {
+    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
+      .then((response) => response.json())
+      .then((data) => {
+        setBlogs(data.reverse());
+      });
+  };
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
   return (
     <>
       {user === "admin" ? (
@@ -39,260 +55,22 @@ export default function Home() {
               <Typography variant="h3">Home</Typography>
             </Box>
             <Grid container spacing={3}>
-              <Grid item lg={4} md={6} xs={12}>
-                <Card
-                  sx={{
-                    boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-                    borderRadius: 2,
-                    cursor: "pointer",
-                  }}
-                >
-                  <Box>
-                    <Box
-                      sx={{
-                        backgroundImage: "url(/img/business-large.jpg)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: "block",
-                        height: "280px",
-                      }}
-                    />
-                  </Box>
-                  <Box sx={{ p: 2 }}>
-                    <Typography variant="h6" color="primary">
-                      Why I Still Lisp, and You Should Too
-                    </Typography>
-                    <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-                      Aliquam dapibus elementum nulla at malesuada. Ut mi nisl,
-                      aliquet non mollis vel, feugiat non nibh.
-                    </Typography>
-                    <Box
-                      sx={{
-                        mt: 2,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", columnGap: 1 }}>
-                        <Avatar
-                          sx={{
-                            background: "#fc818e",
-                            width: 30,
-                            height: 30,
-                          }}
-                        >
-                          R
-                        </Avatar>
-                        <Typography
-                          variant="subtitle1"
-                          sx={{ color: "#696969" }}
-                        >
-                          By Jie Yan Song • Feb 4, 2023
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
-                          15 min ago
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        mt: 2,
-                      }}
-                    >
-                      <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
-                        {/* <Link to={"/blog/1"} style={{ textDecoration: "none" }}> */}
-                        <Button
-                          fullWidth
-                          variant="contained"
-                          href="/blog/1"
-                          sx={{
-                            backgroundColor: "#4d4c4c",
-                            "&:hover": {
-                              backgroundColor: "#333333",
-                            },
-                          }}
-                        >
-                          Read
-                        </Button>
-                        {/* </Link> */}
-                        <Button fullWidth variant="outlined" color="success">
-                          Approve
-                        </Button>
-                        <Button fullWidth variant="outlined" color="error">
-                          Reject
-                        </Button>
-                      </Stack>
-                    </Box>
-                  </Box>
-                </Card>
-              </Grid>
-              <Grid item lg={4} md={6} xs={12}>
-                <Card
-                  sx={{
-                    boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <Box>
-                    <Box
-                      sx={{
-                        backgroundImage: "url(/img/business-large.jpg)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: "block",
-                        height: "280px",
-                      }}
-                    />
-                  </Box>
-                  <Box sx={{ p: 2 }}>
-                    <Typography variant="h6">
-                      Why I Still Lisp, and You Should Too
-                    </Typography>
-                    <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-                      Aliquam dapibus elementum nulla at malesuada. Ut mi nisl,
-                      aliquet non mollis vel, feugiat non nibh.
-                    </Typography>
-                    <Box
-                      sx={{
-                        mt: 2,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", columnGap: 1 }}>
-                        <Avatar
-                          sx={{
-                            background: "#fc818e",
-                            width: 30,
-                            height: 30,
-                          }}
-                        >
-                          N
-                        </Avatar>
-                        <Typography variant="subtitle1">
-                          By Jie Yan Song • Feb 4, 2023
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
-                          25 min ago
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "center", mt: 2 }}
-                    >
-                      <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
-                        <Button
-                          fullWidth
-                          variant="contained"
-                          href="/blog/1"
-                          sx={{
-                            backgroundColor: "#4d4c4c",
-                            "&:hover": {
-                              backgroundColor: "#333333",
-                            },
-                          }}
-                        >
-                          Read
-                        </Button>
-                        <Chip
-                          label="Approved"
-                          color="success"
-                          icon={<DoneAllRoundedIcon />}
-                        />
-                      </Stack>
-                    </Box>
-                  </Box>
-                </Card>
-              </Grid>
-              <Grid item lg={4} md={6} xs={12}>
-                <Card
-                  sx={{
-                    boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-                    borderRadius: 2,
-                  }}
-                >
-                  <Box>
-                    <Box
-                      sx={{
-                        backgroundImage: "url(/img/business-large.jpg)",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: "block",
-                        height: "280px",
-                      }}
-                    />
-                  </Box>
-                  <Box sx={{ p: 2 }}>
-                    <Typography variant="h6">
-                      Why I Still Lisp, and You Should Too
-                    </Typography>
-                    <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-                      Aliquam dapibus elementum nulla at malesuada. Ut mi nisl,
-                      aliquet non mollis vel, feugiat non nibh.
-                    </Typography>
-                    <Box
-                      sx={{
-                        mt: 2,
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Box sx={{ display: "flex", columnGap: 1 }}>
-                        <Avatar
-                          sx={{
-                            background: "#fc818e",
-                            width: 30,
-                            height: 30,
-                          }}
-                        >
-                          N
-                        </Avatar>
-                        <Typography variant="subtitle1">
-                          By Jie Yan Song • Feb 4, 2023
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
-                          5 days ago
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <Box
-                      sx={{ display: "flex", justifyContent: "center", mt: 2 }}
-                    >
-                      <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
-                        <Button
-                          fullWidth
-                          variant="contained"
-                          href="/blog/1"
-                          sx={{
-                            backgroundColor: "#4d4c4c",
-                            "&:hover": {
-                              backgroundColor: "#333333",
-                            },
-                          }}
-                        >
-                          Read
-                        </Button>
-                        <Chip
-                          label="Rejected"
-                          color="error"
-                          icon={<CloseRoundedIcon />}
-                        />
-                      </Stack>
-                    </Box>
-                  </Box>
-                </Card>
-              </Grid>
+            {blogs ? (
+            blogs?.reverse().map((ele) => {
+              return <HomeAdminGrid data={ele} />;
+            })
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                my: 10,
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          )}
             </Grid>
           </Container>
         </>
