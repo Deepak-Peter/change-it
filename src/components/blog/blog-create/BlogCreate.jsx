@@ -13,17 +13,26 @@ import { fileToBase64 } from "../../../utils/file-to-base64";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { PopupModal } from "../../modal/popupModal";
 
 export const BlogCreate = () => {
   const [img, setImg] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [popupOpen, setPopupOpen] = useState(false);
   const handleDropCover = async ([file]) => {
     const data = await fileToBase64(file);
     setSelectedImage(data);
   };
   const handleRemove = () => {
     setSelectedImage(null);
+  };
+
+  const handleOpen = () => {
+    setPopupOpen(true);
+  };
+  const handleClose = () => {
+    setPopupOpen(false);
   };
 
   const onSubmitAPICall = async (values) => {
@@ -53,8 +62,8 @@ export const BlogCreate = () => {
       .then((response) => response.json())
       .then((data) => {
         // setBlogs(data);
-        alert("blog submitted");
-        this.props.history.replace('/blog');
+        // alert("blog submitted");
+        setPopupOpen(true);
       });
   };
 
@@ -267,25 +276,11 @@ export const BlogCreate = () => {
           </CardContent>
         </Card>
 
-        <Box sx={{ mt: 2, display: "flex", justifyContent: "end" }}>
-          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
-            <Button
-              component="a"
-              sx={{
-                display: {
-                  xs: "none",
-                  sm: "inline-flex",
-                },
-                mr: 2,
-              }}
-              variant="outlined"
-            >
-              Cancel
-            </Button>
-          </Link>
-          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
+        <Box sx={{ mt: 4, display: "flex", justifyContent: "end" }}>
           <Button
-            type="submit"
+            component="a"
+            href="/blog"
+            color="inherit"
             sx={{
               display: {
                 xs: "none",
@@ -293,11 +288,31 @@ export const BlogCreate = () => {
               },
               mr: 2,
             }}
-            variant="contained"
+            variant="outlined"
           >
-            Submit
+            Cancel
           </Button>
+
+          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
+            <Button
+              type="submit"
+              color="error"
+              sx={{
+                display: {
+                  xs: "none",
+                  sm: "inline-flex",
+                },
+              }}
+              variant="contained"
+            >
+              Submit
+            </Button>
           </Link>
+          <PopupModal
+            popupOpen={popupOpen}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
         </Box>
         {/* </Container> */}
       </form>

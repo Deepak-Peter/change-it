@@ -93,7 +93,7 @@ export default function Blog() {
                 my: 10,
               }}
             >
-              <CircularProgress />
+              <CircularProgress color="error" />
             </Box>
           )}
         </Grid>

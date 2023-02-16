@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  Chip,
   Container,
   Divider,
   Grid,
@@ -15,19 +16,27 @@ export const BlogGrid = (props) => {
   const [id, setId] = useState();
 
   return (
-    <Grid item lg={6} md={6} xs={12}>
-    <Card
-      sx={{
-        boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-        borderRadius: 2,
-        cursor: "pointer",
-      }}    
+    <Grid
+      item
+      lg={6}
+      md={6}
+      xs={12}
+      sx={{ display: "grid", alignItems: "strech" }}
     >
-      <Link to={`/blog/${props.ele.id}`} 
-      style={{ textDecoration: "none", color: "black" }}>
-     {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
-        <Box>
-      {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
+      <Card
+        sx={{
+          boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
+          borderRadius: 2,
+          cursor: "pointer",
+        }}
+      >
+        <Link
+          to={`/blog/${props.ele.id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
+          <Box>
+            {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
 
             <Box
               sx={{
@@ -41,9 +50,14 @@ export const BlogGrid = (props) => {
           </Box>
           <Box sx={{ p: 2 }}>
             <Typography variant="h6">{props.ele.title}</Typography>
-            <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-              {props.ele.category}
-            </Typography>
+            <Box sx={{ my: 1 }}>
+              <Chip
+                label={props.ele.category}
+                color="error"
+                size="small"
+                sx={{ px: 0.5 }}
+              />
+            </Box>
             <Box
               sx={{
                 mt: 2,

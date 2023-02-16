@@ -2,6 +2,8 @@ import TopBar from "./components/topbar/TopBar";
 import Login from "./components/login/login";
 import Blog from "./components/blog/Blog";
 import Home from "./components/home/Home";
+import About from "./components/about/About";
+
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Profile } from "./components/profile/Profile";
@@ -37,6 +39,7 @@ function App() {
           <Route path="login" element={user ? <Home /> : <Login />} />
           <Route path="register" element={user ? <Home /> : <Register />} />
           <Route path="home" element={user ? <Home /> : <Login />} />
+          <Route path="about" element={user ? <About /> : <Login />} />
           <Route path="profile" element={user ? <Profile /> : <Login />} />
           <Route path="blog" element={user ? <Blog /> : <Login />} />
           <Route

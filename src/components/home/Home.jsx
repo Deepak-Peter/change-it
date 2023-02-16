@@ -142,7 +142,7 @@ export default function Home() {
                   </div>
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
-                    <p style={{ marginTop: "10px" }}>Done Tasks</p>
+                    <p style={{ marginTop: "10px" }}>Approved Blogs</p>
                     <h1>10</h1>
                   </div>
                 </div>
