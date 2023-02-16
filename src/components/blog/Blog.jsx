@@ -22,7 +22,7 @@ export default function Blog() {
     await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
       .then((response) => response.json())
       .then((data) => {
-        setBlogs(data);
+        setBlogs(data.reverse());
       });
   };
 
@@ -80,128 +80,20 @@ export default function Blog() {
           }}
         >
           {blogs ? (
-            blogs?.map((ele) => {
+            blogs?.reverse().map((ele) => {
               return <BlogGrid ele={ele} />;
             })
           ) : (
-            <Box sx={{ my: 10 }}>
-              <CircularProgress color="error" />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress />
             </Box>
           )}
-          {/* <Grid item lg={6} md={6} xs={12}>
-            <Card
-              sx={{
-                boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-                borderRadius: 2,
-              }}
-            >
-              <Box>
-                <Box
-                  sx={{
-                    backgroundImage: "url(/img/business-large.jpg)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    display: "block",
-                    height: "280px",
-                  }}
-                />
-              </Box>
-              <Box sx={{ p: 2 }}>
-                <Typography variant="h6">
-                  Why I Still Lisp, and You Should Too
-                </Typography>
-                <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-                  Aliquam dapibus elementum nulla at malesuada. Ut mi nisl,
-                  aliquet non mollis vel, feugiat non nibh.
-                </Typography>
-                <Box
-                  sx={{
-                    mt: 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box sx={{ display: "flex", columnGap: 1 }}>
-                    <Avatar
-                      sx={{
-                        background: "#fc818e",
-                        width: 30,
-                        height: 30,
-                      }}
-                    >
-                      N
-                    </Avatar>
-                    <Typography variant="subtitle1">
-                      By Jie Yan Song • Feb 4, 2023
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
-                      5 min read
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Card>
-          </Grid>
-          <Grid item lg={6} md={6} xs={12}>
-            <Card
-              sx={{
-                boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-                borderRadius: 2,
-              }}
-            >
-              <Box>
-                <Box
-                  sx={{
-                    backgroundImage: "url(/img/business-large.jpg)",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    display: "block",
-                    height: "280px",
-                  }}
-                />
-              </Box>
-              <Box sx={{ p: 2 }}>
-                <Typography variant="h6">
-                  Why I Still Lisp, and You Should Too
-                </Typography>
-                <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-                  Aliquam dapibus elementum nulla at malesuada. Ut mi nisl,
-                  aliquet non mollis vel, feugiat non nibh.
-                </Typography>
-                <Box
-                  sx={{
-                    mt: 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Box sx={{ display: "flex", columnGap: 1 }}>
-                    <Avatar
-                      sx={{
-                        background: "#fc818e",
-                        width: 30,
-                        height: 30,
-                      }}
-                    >
-                      N
-                    </Avatar>
-                    <Typography variant="subtitle1">
-                      By Jie Yan Song • Feb 4, 2023
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
-                      5 min read
-                    </Typography>
-                  </Box>
-                </Box>
-              </Box>
-            </Card>
-          </Grid> */}
         </Grid>
 
         <Box

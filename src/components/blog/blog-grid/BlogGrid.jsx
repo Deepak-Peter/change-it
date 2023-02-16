@@ -16,20 +16,18 @@ export const BlogGrid = (props) => {
 
   return (
     <Grid item lg={6} md={6} xs={12}>
-      <Card
-        sx={{
-          boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
-          borderRadius: 2,
-          cursor: "pointer",
-        }}
-      >
-        <Link
-          to={`/blog/${props.ele._id}`}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
-          <Box>
-            {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
+    <Card
+      sx={{
+        boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
+        borderRadius: 2,
+        cursor: "pointer",
+      }}    
+    >
+      <Link to={`/blog/${props.ele.id}`} 
+      style={{ textDecoration: "none", color: "black" }}>
+     {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
+        <Box>
+      {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
 
             <Box
               sx={{

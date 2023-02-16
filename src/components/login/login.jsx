@@ -56,6 +56,8 @@ function Login() {
           localStorage.setItem("isLoggedIn", "admin");
           window.location.reload();
         }
+        const user=values.username.split("@");
+        localStorage.setItem('blogUser',user[0]);
         // postUser(regData);
       } catch (err) {
         console.error(err);

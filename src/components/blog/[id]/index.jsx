@@ -55,12 +55,11 @@ export const BlogDetails = () => {
           </Box>
 
           <Box sx={{ mb: 4 }}>
-            <Typography variant="h3" sx={{ mb: 2 }}>
-              title
+            <Typography variant="h3" color="primary" sx={{ mb: 2 }}>
+              {data?.title}
             </Typography>
             <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-              Aliquam dapibus elementum nulla at malesuada. Ut mi nisl, aliquet
-              non mollis vel, feugiat non nibh.
+              {data?.category}
             </Typography>
             <Box
               sx={{
@@ -90,7 +89,7 @@ export const BlogDetails = () => {
           <Box>
             <Box
               sx={{
-                backgroundImage: "url(/img/business-large.jpg)",
+                backgroundImage: `url(${data?.imagestr})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 display: "block",
@@ -102,15 +101,10 @@ export const BlogDetails = () => {
 
           <Box sx={{ mt: 3 }}>
             <Typography variant="h6" fontWeight="900" sx={{ mb: 2 }}>
-              Cras at molestie lacus. Phasellus feugiat leo quis sem iaculis,
-              sed mattis nibh accumsan.
+             {data?.content[0]}
             </Typography>
             <Typography variant="body1" color="#696969" sx={{ mb: 2 }}>
-              Phasellus ullamcorper ultrices ullamcorper. Nunc auctor porttitor
-              ex, non consequat ipsum aliquam at. Duis dapibus dolor in nisi
-              viverra, a elementum nulla viverra. Etiam feugiat turpis leo, nec
-              finibus diam rhoncus ac. Sed at metus et orci consequat facilisis
-              vel vel diam.
+            {data?.content[1]}
             </Typography>
             <Typography variant="h6" fontWeight="900" sx={{ mb: 2 }}>
               Cras at molestie lacus. Phasellus feugiat leo quis sem iaculis,

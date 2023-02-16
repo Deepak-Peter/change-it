@@ -11,12 +11,13 @@ import {
 } from "@mui/material";
 import { fileToBase64 } from "../../../utils/file-to-base64";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import { useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export const BlogCreate = () => {
-  const params = useParams();
-  const [cover, setCover] = useState("/static/mock-images/covers/cover_4.jpeg");
   const [img, setImg] = useState();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const handleDropCover = async ([file]) => {
     const data = await fileToBase64(file);
     setSelectedImage(data);
@@ -25,23 +26,15 @@ export const BlogCreate = () => {
     setSelectedImage(null);
   };
 
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
-
-  const onSubmit = async () => {
-    // axios
-    // .post(`http://localhost:9000/.netlify/functions/blog`,{
-    //   title: 'Blog Sample',
-    //   category: 'sample'
-    // })
-    // .then((res) => setData(res.data))
-    // .catch((err) => console.log(err, "it has an error"));
+  const onSubmitAPICall = async (values) => {
     const data = {
-      title: "Y I still exist",
-      category: "sample",
+      title: values.title,
+      category: values.category,
       imagestr: img,
-      content: ["demo", "smaple created for blog p"],
-      signature: ["Kalidas M"],
+      content: [values.content1, values.content2],
+      signature: [`${localStorage.getItem("blogUser")}`],
+      reviewed: values.reviewed,
+      approved: values.approved,
     };
 
     await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog", {
@@ -60,18 +53,39 @@ export const BlogCreate = () => {
       .then((response) => response.json())
       .then((data) => {
         // setBlogs(data);
+        alert("blog submitted");
+        this.props.history.replace('/blog');
       });
   };
 
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      title: "",
+      category: "",
+      imagestr: "",
+      content1: "",
+      content2: "",
+      signature: "",
+      reviewed: false,
+      approved: false,
+      submit: null,
+    },
+    validationSchema: Yup.object({}),
+    onSubmit: async (values) => {
+      try {
+        onSubmitAPICall(values);
+        // postUser(regData);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  });
   useEffect(() => {
     if (selectedImage) {
       setImageUrl(URL.createObjectURL(selectedImage));
     }
   }, [selectedImage]);
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {}, []);
 
   return (
     <Container
@@ -81,7 +95,8 @@ export const BlogCreate = () => {
         py: 8,
       }}
     >
-      <Container maxWidth="xl">
+      <form noValidate onSubmit={formik.handleSubmit}>
+        {/* <Container maxWidth="xl"> */}
         <Typography variant="h3" sx={{ mt: 3 }}>
           Create post
         </Typography>
@@ -96,9 +111,21 @@ export const BlogCreate = () => {
           <CardContent>
             <Typography variant="h6">Basic details</Typography>
             <Box sx={{ mt: 3 }}>
-              <TextField fullWidth label="Post title" name="title" />
+              <TextField
+                fullWidth
+                label="Post title"
+                name="title"
+                onChange={formik.handleChange}
+                value={formik.values.title}
+              />
               <Box sx={{ mt: 3 }}>
-                <TextField fullWidth label="Short description" />
+                <TextField
+                  fullWidth
+                  label="Category"
+                  onChange={formik.handleChange}
+                  value={formik.values.category}
+                  name="category"
+                />
               </Box>
             </Box>
           </CardContent>
@@ -156,12 +183,6 @@ export const BlogCreate = () => {
             )}
 
             <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
-              {/* {imageUrl && selectedImage && (
-                <Box mt={2} textAlign="center">
-                  <div>Image Preview:</div>
-                  <img src={imageUrl} alt={selectedImage.name} />
-                </Box>
-              )} */}
               <Box>
                 <input
                   accept="image/*"
@@ -204,8 +225,33 @@ export const BlogCreate = () => {
           }}
         >
           <CardContent>
-            <Typography variant="h6" paddingBottom={2}>
+            <Typography
+              variant="h6"
+              paddingBottom={2}
+              name="content1"
+              onChange={formik.handleChange}
+              value={formik.values.content1}
+            >
               Content
+            </Typography>
+            <TextField
+              fullWidth
+              rows={5}
+              variant="outlined"
+              placeholder="write something"
+              multiline
+              name="content1"
+              onChange={formik.handleChange}
+              value={formik.values.content1}
+            />
+            <Typography
+              variant="h6"
+              paddingBottom={2}
+              name="content2"
+              onChange={formik.handleChange}
+              value={formik.values.content2}
+            >
+              Paragragh
             </Typography>
 
             <TextField
@@ -214,44 +260,16 @@ export const BlogCreate = () => {
               variant="outlined"
               placeholder="write something"
               multiline
+              name="content2"
+              onChange={formik.handleChange}
+              value={formik.values.content2}
             />
           </CardContent>
         </Card>
-        <Box
-          sx={{
-            display: {
-              sm: "none",
-            },
-            mt: 2,
-          }}
-        >
-          <Link href="/blog/1" passHref>
-            <Button component="a" variant="contained">
-              Publish changes
-            </Button>
-          </Link>
-        </Box>
+
         <Box sx={{ mt: 2, display: "flex", justifyContent: "end" }}>
-          {/* <Link href="" passHref style={{ textDecoration: "none" }}> */}
-          <Button
-            color="inherit"
-            component="a"
-            href="/blog"
-            sx={{
-              display: {
-                xs: "none",
-                sm: "inline-flex",
-              },
-              mr: 2,
-            }}
-            variant="outlined"
-          >
-            Cancel
-          </Button>
-          {/* </Link> */}
-          <Link passHref style={{ textDecoration: "none" }}>
+          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
             <Button
-              color="error"
               component="a"
               sx={{
                 display: {
@@ -260,17 +278,29 @@ export const BlogCreate = () => {
                 },
                 mr: 2,
               }}
-              variant="contained"
-              onClick={onSubmit}
+              variant="outlined"
             >
-              Submit
+              Cancel
             </Button>
           </Link>
+          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
+          <Button
+            type="submit"
+            sx={{
+              display: {
+                xs: "none",
+                sm: "inline-flex",
+              },
+              mr: 2,
+            }}
+            variant="contained"
+          >
+            Submit
+          </Button>
+          </Link>
         </Box>
-        {/* <IconButton>
-            <DotsHorizontalIcon fontSize="small" />
-          </IconButton> */}
-      </Container>
+        {/* </Container> */}
+      </form>
     </Container>
   );
 };
