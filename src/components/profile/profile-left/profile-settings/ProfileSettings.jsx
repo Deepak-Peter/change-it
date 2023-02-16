@@ -91,7 +91,12 @@ export const ProfileSettings = () => {
               p: 2,
             }}
           >
-            <Button type="submit" variant="contained" sx={{ boxShadow: 0 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="error"
+              sx={{ boxShadow: 0 }}
+            >
               Update Profile
             </Button>
           </CardActions>

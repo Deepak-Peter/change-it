@@ -55,7 +55,7 @@ export const BlogDetails = () => {
           </Box>
 
           <Box sx={{ mb: 4 }}>
-            <Typography variant="h3" color="primary" sx={{ mb: 2 }}>
+            <Typography variant="h3" sx={{ mb: 2 }}>
               title
             </Typography>
             <Typography variant="body1" sx={{ color: "#8c8c8c" }}>

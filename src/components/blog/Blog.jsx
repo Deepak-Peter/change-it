@@ -70,14 +70,22 @@ export default function Blog() {
         </Typography>
         <Divider sx={{ my: 3 }} />
 
-        <Grid container spacing={3}>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {blogs ? (
             blogs?.map((ele) => {
               return <BlogGrid ele={ele} />;
             })
           ) : (
-            <Box sx={{ display: "flex",justifyContent:"center",alignItems:"center" }}>
-              <CircularProgress />
+            <Box sx={{ my: 10 }}>
+              <CircularProgress color="error" />
             </Box>
           )}
           {/* <Grid item lg={6} md={6} xs={12}>

@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  Chip,
   Container,
   Grid,
   Stack,
@@ -11,6 +12,8 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 export default function Home() {
   const user = localStorage.getItem("isLoggedIn");
@@ -103,11 +106,21 @@ export default function Home() {
                     >
                       <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                         {/* <Link to={"/blog/1"} style={{ textDecoration: "none" }}> */}
-                        <Button fullWidth variant="contained" href="/blog/1">
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          href="/blog/1"
+                          sx={{
+                            backgroundColor: "#4d4c4c",
+                            "&:hover": {
+                              backgroundColor: "#333333",
+                            },
+                          }}
+                        >
                           Read
                         </Button>
                         {/* </Link> */}
-                        <Button fullWidth variant="contained" color="success">
+                        <Button fullWidth variant="outlined" color="success">
                           Approve
                         </Button>
                         <Button fullWidth variant="outlined" color="error">
@@ -176,15 +189,24 @@ export default function Home() {
                       sx={{ display: "flex", justifyContent: "center", mt: 2 }}
                     >
                       <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
-                        <Button fullWidth variant="contained" href="/blog/1">
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          href="/blog/1"
+                          sx={{
+                            backgroundColor: "#4d4c4c",
+                            "&:hover": {
+                              backgroundColor: "#333333",
+                            },
+                          }}
+                        >
                           Read
                         </Button>
-                        <Button fullWidth variant="contained" color="success">
-                          Approve
-                        </Button>
-                        <Button fullWidth variant="outlined" color="error">
-                          Reject
-                        </Button>
+                        <Chip
+                          label="Approved"
+                          color="success"
+                          icon={<DoneAllRoundedIcon />}
+                        />
                       </Stack>
                     </Box>
                   </Box>
@@ -248,15 +270,24 @@ export default function Home() {
                       sx={{ display: "flex", justifyContent: "center", mt: 2 }}
                     >
                       <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
-                        <Button fullWidth variant="contained" href="/blog/1">
+                        <Button
+                          fullWidth
+                          variant="contained"
+                          href="/blog/1"
+                          sx={{
+                            backgroundColor: "#4d4c4c",
+                            "&:hover": {
+                              backgroundColor: "#333333",
+                            },
+                          }}
+                        >
                           Read
                         </Button>
-                        <Button fullWidth variant="contained" color="success">
-                          Approve
-                        </Button>
-                        <Button fullWidth variant="outlined" color="error">
-                          Reject
-                        </Button>
+                        <Chip
+                          label="Rejected"
+                          color="error"
+                          icon={<CloseRoundedIcon />}
+                        />
                       </Stack>
                     </Box>
                   </Box>
@@ -285,6 +316,7 @@ export default function Home() {
               <Box>
                 <Link to="/blog/blogCreate" style={{ textDecoration: "none" }}>
                   <Button
+                    color="error"
                     component="a"
                     variant="contained"
                     sx={{ boxShadow: 0 }}

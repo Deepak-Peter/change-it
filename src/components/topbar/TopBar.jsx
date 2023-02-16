@@ -236,7 +236,7 @@ function TopBar() {
                 </Link>
               ))}
             </Box>
-            <Search sx={{ height: "40px", borderRadius: 2 }}>
+            {/* <Search sx={{ height: "40px", borderRadius: 2 }}>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -244,7 +244,7 @@ function TopBar() {
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />
-            </Search>
+            </Search> */}
             {user && (
               <Box sx={{ flexGrow: 0, ml: 2 }}>
                 <Tooltip title="Open settings">
@@ -287,7 +287,7 @@ function TopBar() {
                 </Menu>
               </Box>
             )}
-              {/* <div>
+            {/* <div>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}

@@ -61,12 +61,12 @@ export const Profile = () => {
               },
             }}
           >
-            <Button sx={{ ml: 2 }} variant="outlined" color="error">
+            <Button sx={{ ml: 2 }} variant="outlined" color="inherit">
               Change Picture
             </Button>
           </Box>
           <Tooltip title="More options">
-            <IconButton sx={{ ml: 1 }}>
+            <IconButton sx={{ ml: 1, "&:hover": { color: "error.main" } }}>
               <MoreHorizOutlinedIcon fontSize="small" />
             </IconButton>
           </Tooltip>

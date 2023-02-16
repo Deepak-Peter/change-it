@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 export const BlogCreate = () => {
   const params = useParams();
   const [cover, setCover] = useState("/static/mock-images/covers/cover_4.jpeg");
-  const [img,setImg]=useState();
+  const [img, setImg] = useState();
   const handleDropCover = async ([file]) => {
     const data = await fileToBase64(file);
     setSelectedImage(data);
@@ -28,7 +28,7 @@ export const BlogCreate = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
-  const onSubmit=async()=>{
+  const onSubmit = async () => {
     // axios
     // .post(`http://localhost:9000/.netlify/functions/blog`,{
     //   title: 'Blog Sample',
@@ -36,19 +36,16 @@ export const BlogCreate = () => {
     // })
     // .then((res) => setData(res.data))
     // .catch((err) => console.log(err, "it has an error"));
-    const data={
-        title: 'Y I still exist',
-      category: 'sample',
-      imagestr:img,
-      content:[
-        'demo',
-        'smaple created for blog p'
-      ],
-      signature:['Kalidas M'],
-    }
+    const data = {
+      title: "Y I still exist",
+      category: "sample",
+      imagestr: img,
+      content: ["demo", "smaple created for blog p"],
+      signature: ["Kalidas M"],
+    };
 
-    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog",{
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
       // mode: 'cors', // no-cors, *cors, same-origin
       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       // credentials: 'same-origin', // include, *same-origin, omit
@@ -58,13 +55,13 @@ export const BlogCreate = () => {
       // },
       // redirect: 'follow', // manual, *follow, error
       // referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
     })
-    .then((response) => response.json())
-    .then((data) => {
-      // setBlogs(data);
-    });
-  }
+      .then((response) => response.json())
+      .then((data) => {
+        // setBlogs(data);
+      });
+  };
 
   useEffect(() => {
     if (selectedImage) {
@@ -74,9 +71,7 @@ export const BlogCreate = () => {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
- 
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Container
@@ -91,7 +86,13 @@ export const BlogCreate = () => {
           Create post
         </Typography>
 
-        <Card sx={{ mt: 4 }}>
+        <Card
+          sx={{
+            mt: 4,
+            boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
+            borderRadius: 2,
+          }}
+        >
           <CardContent>
             <Typography variant="h6">Basic details</Typography>
             <Box sx={{ mt: 3 }}>
@@ -102,7 +103,13 @@ export const BlogCreate = () => {
             </Box>
           </CardContent>
         </Card>
-        <Card sx={{ mt: 4 }}>
+        <Card
+          sx={{
+            mt: 4,
+            boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
+            borderRadius: 2,
+          }}
+        >
           <CardContent>
             <Typography variant="h6">Post cover</Typography>
             {imageUrl && selectedImage ? (
@@ -132,7 +139,7 @@ export const BlogCreate = () => {
                   p: 3,
                 }}
               >
-                <CloudUploadOutlinedIcon color="primary" fontSize="large" />
+                <CloudUploadOutlinedIcon color="error" fontSize="large" />
                 <Typography align="center" color="textSecondary" variant="h6">
                   Select a cover image
                 </Typography>
@@ -161,30 +168,41 @@ export const BlogCreate = () => {
                   type="file"
                   id="select-image"
                   style={{ display: "none" }}
-                  onChange={(e) =>{
+                  onChange={(e) => {
                     debugger;
                     var reader = new FileReader();
                     reader.readAsDataURL(e.target.files[0]);
-                    console.log(reader,'readre')
+                    console.log(reader, "readre");
                     reader.onload = () => {
                       console.log(reader.result); //base64encoded string
-                      setImg(reader.result)
+                      setImg(reader.result);
                     };
-                     setSelectedImage(e.target.files[0])}}
+                    setSelectedImage(e.target.files[0]);
+                  }}
                 />
                 <label htmlFor="select-image">
-                  <Button variant="contained" color="primary" component="span">
+                  <Button variant="contained" color="error" component="span">
                     Upload Image
                   </Button>
                 </label>
               </Box>
-              <Button onClick={handleRemove} disabled={!imageUrl}>
+              <Button
+                color="inherit"
+                onClick={handleRemove}
+                disabled={!imageUrl}
+              >
                 Remove photo
               </Button>
             </Box>
           </CardContent>
         </Card>
-        <Card sx={{ mt: 4 }}>
+        <Card
+          sx={{
+            mt: 4,
+            boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
+            borderRadius: 2,
+          }}
+        >
           <CardContent>
             <Typography variant="h6" paddingBottom={2}>
               Content
@@ -214,23 +232,26 @@ export const BlogCreate = () => {
           </Link>
         </Box>
         <Box sx={{ mt: 2, display: "flex", justifyContent: "end" }}>
-          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
+          {/* <Link href="" passHref style={{ textDecoration: "none" }}> */}
+          <Button
+            color="inherit"
+            component="a"
+            href="/blog"
+            sx={{
+              display: {
+                xs: "none",
+                sm: "inline-flex",
+              },
+              mr: 2,
+            }}
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+          {/* </Link> */}
+          <Link passHref style={{ textDecoration: "none" }}>
             <Button
-              component="a"
-              sx={{
-                display: {
-                  xs: "none",
-                  sm: "inline-flex",
-                },
-                mr: 2,
-              }}
-              variant="outlined"
-            >
-              Cancel
-            </Button>
-          </Link>
-          <Link  passHref style={{ textDecoration: "none" }}>
-            <Button
+              color="error"
               component="a"
               sx={{
                 display: {
