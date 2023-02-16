@@ -15,6 +15,40 @@ import React, { useEffect, useState } from "react";
 export const BlogGrid = (props) => {
   const [id, setId] = useState();
 
+  const onReject = async (id) => {
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${id}`,
+      {
+        method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // setBlogs(data);
+
+        window.location.reload();
+      });
+  };
+
+  const onApprove = async (id) => {
+    const data = {
+      approved: true,
+    };
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${id}`,
+      {
+        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+        body: JSON.stringify(data),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // setBlogs(data);
+
+        window.location.reload();
+      });
+  };
+
   return (
     <Grid
       item
@@ -70,13 +104,13 @@ export const BlogGrid = (props) => {
                 <Avatar
                   sx={{
                     background: "#fc818e",
-                    //   background:
-                    //     "linear-gradient(90deg, rgba(105,228,254,1) 0%, rgba(2,186,223,1) 100%)",
                     width: 30,
                     height: 30,
+                    textTransform: "uppercase",
+                    fontSize: "14px",
                   }}
                 >
-                  R
+                  {props?.data?.signature[0]?.substring(0, 1)}
                 </Avatar>
                 <Typography variant="subtitle1" sx={{ color: "#696969" }}>
                   By {props.ele.signature[0]} • {props.ele.createdAt}

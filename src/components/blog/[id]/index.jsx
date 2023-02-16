@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Card,
+  Chip,
   Container,
   Divider,
   Grid,
@@ -12,7 +13,7 @@ import {
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
-export const BlogDetails = () => {
+export const BlogDetails = (props) => {
   const [data, setData] = useState();
   const params = useParams();
 
@@ -55,12 +56,15 @@ export const BlogDetails = () => {
           </Box>
 
           <Box sx={{ mb: 4 }}>
-            <Typography variant="h3" color="primary" sx={{ mb: 2 }}>
+            <Typography variant="h3" sx={{ mb: 2 }}>
               {data?.title}
             </Typography>
-            <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-              {data?.category}
-            </Typography>
+            <Chip
+              label={data?.category}
+              color="error"
+              size="small"
+              sx={{ px: 0.5 }}
+            />
             <Box
               sx={{
                 mt: 2,
@@ -75,13 +79,18 @@ export const BlogDetails = () => {
                     background: "#fc818e",
                     width: 30,
                     height: 30,
+                    textTransform: "uppercase",
+                    fontSize: "14px",
                   }}
                 >
-                  R
+                  {data?.signature[0]?.substring(0, 1)}
                 </Avatar>
-                <Typography variant="subtitle1" sx={{ color: "#696969" }}>
-                  By Jie Yan Song • Feb 4, 2023
-                </Typography>
+                <Box>
+                  <Typography variant="subtitle1" sx={{ color: "#696969" }}>
+                    By {data?.signature[0]}
+                  </Typography>
+                  <Typography variant="caption">{data?.createdAt}</Typography>
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -101,39 +110,10 @@ export const BlogDetails = () => {
 
           <Box sx={{ mt: 3 }}>
             <Typography variant="h6" fontWeight="900" sx={{ mb: 2 }}>
-             {data?.content[0]}
+              {data?.content[0]}
             </Typography>
             <Typography variant="body1" color="#696969" sx={{ mb: 2 }}>
-            {data?.content[1]}
-            </Typography>
-            <Typography variant="h6" fontWeight="900" sx={{ mb: 2 }}>
-              Cras at molestie lacus. Phasellus feugiat leo quis sem iaculis,
-              sed mattis nibh accumsan.
-            </Typography>
-            <Typography variant="body1" color="#696969" sx={{ mb: 2 }}>
-              Etiam faucibus massa auctor gravida finibus. Cras nulla magna,
-              dapibus sit amet accumsan nec, ullamcorper sit amet dolor.
-              <br />
-              Donec leo nisi, porta et gravida nec, tincidunt ac velit. Aliquam
-              in turpis a quam tempus dapibus. Morbi in tellus tempor, hendrerit
-              mi vel, aliquet tellus. Quisque vel interdum ante. Nunc quis purus
-              sem. Donec at risus lacinia ipsum cursus condimentum at ac dui.
-              Nulla bibendum feugiat tellus ac tristique. Proin auctor, lectus
-              et accumsan varius, justo odio vulputate neque, et efficitur augue
-              leo id ex. Aliquam eget turpis nisl. Nam sapien massa,
-              sollicitudin et vehicula a, fringilla vitae purus. Praesent a
-              vestibulum felis.
-            </Typography>
-            <Typography variant="h6" fontWeight="900" sx={{ mb: 2 }}>
-              Cras at molestie lacus. Phasellus feugiat leo quis sem iaculis,
-              sed mattis nibh accumsan.
-            </Typography>
-            <Typography variant="body1" color="#696969" sx={{ mb: 2 }}>
-              Phasellus ullamcorper ultrices ullamcorper. Nunc auctor porttitor
-              ex, non consequat ipsum aliquam at. Duis dapibus dolor in nisi
-              viverra, a elementum nulla viverra. Etiam feugiat turpis leo, nec
-              finibus diam rhoncus ac. Sed at metus et orci consequat facilisis
-              vel vel diam.
+              {data?.content[1]}
             </Typography>
           </Box>
 
@@ -181,7 +161,7 @@ export const BlogDetails = () => {
                     height: 40,
                   }}
                 >
-                  R
+                  S
                 </Avatar>
               </Box>
               <Box
@@ -213,7 +193,7 @@ export const BlogDetails = () => {
                     height: 40,
                   }}
                 >
-                  R
+                  A
                 </Avatar>
               </Box>
               <TextField
