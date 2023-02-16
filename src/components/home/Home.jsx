@@ -17,7 +17,6 @@ import React, { useEffect, useState } from "react";
 import { HomeAdminGrid } from "./HomeAdminGrid";
 import CircularProgress from "@mui/material/CircularProgress";
 
-
 export default function Home() {
   const user = localStorage.getItem("isLoggedIn");
   const [blogs, setBlogs] = useState();
@@ -55,22 +54,21 @@ export default function Home() {
               <Typography variant="h3">Home</Typography>
             </Box>
             <Grid container spacing={3}>
-            {blogs ? (
-            blogs?.reverse().map((ele) => {
-              return <HomeAdminGrid data={ele} />;
-            })
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                my: 10,
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          )}
+              {blogs ? (
+                blogs?.reverse().map((ele) => {
+                  return <HomeAdminGrid data={ele} />;
+                })
+              ) : (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                  }}
+                >
+                  <CircularProgress color="error" />
+                </Box>
+              )}
             </Grid>
           </Container>
         </>

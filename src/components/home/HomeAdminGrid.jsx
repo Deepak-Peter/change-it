@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -6,13 +6,29 @@ import {
   Card,
   Chip,
   Grid,
+  Snackbar,
   Stack,
   Typography,
 } from "@mui/material";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
+import { BlogSnackbar } from "../snackbar/BlogSnackbar";
 
 export const HomeAdminGrid = (props) => {
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const onReject = async (id) => {
+    setOpen(true);
+    setMessage("Rejected successfully");
     await fetch(
       `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${id}`,
       {
@@ -22,12 +38,15 @@ export const HomeAdminGrid = (props) => {
       .then((response) => response.json())
       .then((data) => {
         // setBlogs(data);
-        alert("Deleted successfully");
+
         window.location.reload();
       });
   };
 
   const onApprove = async (id) => {
+    setOpen(true);
+    setMessage("Approved successfully");
+
     const data = {
       approved: true,
     };
@@ -41,12 +60,18 @@ export const HomeAdminGrid = (props) => {
       .then((response) => response.json())
       .then((data) => {
         // setBlogs(data);
-        alert("Approved successfully");
+
         window.location.reload();
       });
   };
   return (
     <Grid item lg={4} md={6} xs={12}>
+      <BlogSnackbar
+        open={open}
+        handleClick={handleClick}
+        handleClose={handleClose}
+        message={message}
+      />
       <Card
         sx={{
           boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
@@ -66,12 +91,26 @@ export const HomeAdminGrid = (props) => {
           />
         </Box>
         <Box sx={{ p: 2 }}>
-          <Typography variant="h6" color="primary">
+          <Typography
+            variant="h6"
+            sx={{
+              display: "-webkit-box",
+              WebkitLineClamp: { xs: "1", md: "1" },
+              WebkitBoxOrient: "vertical",
+              whiteSpace: "normal",
+              overflow: "hidden",
+            }}
+          >
             {props.data?.title}
           </Typography>
-          <Typography variant="body1" sx={{ color: "#8c8c8c" }}>
-            {props.data?.category}
-          </Typography>
+          <Box sx={{ my: 1 }}>
+            <Chip
+              label={props.data?.category}
+              color="error"
+              size="small"
+              sx={{ px: 0.5 }}
+            />
+          </Box>
           <Box
             sx={{
               mt: 2,
@@ -86,13 +125,20 @@ export const HomeAdminGrid = (props) => {
                   background: "#fc818e",
                   width: 30,
                   height: 30,
+                  textTransform: "uppercase",
+                  fontSize: "14px",
                 }}
               >
                 {props?.data?.signature[0]?.substring(0, 1)}
               </Avatar>
-              <Typography variant="subtitle1" sx={{ color: "#696969" }}>
-                By {props?.data?.signature[0]} • {props?.data?.createdAt}
-              </Typography>
+              <Box>
+                <Typography variant="subtitle1" sx={{ color: "#696969" }}>
+                  By {props?.data?.signature[0]}
+                </Typography>
+                <Typography variant="caption">
+                  {props?.data?.createdAt}
+                </Typography>
+              </Box>
             </Box>
             <Box>
               <Typography variant="body2" sx={{ color: "#8c8c8c" }}>
