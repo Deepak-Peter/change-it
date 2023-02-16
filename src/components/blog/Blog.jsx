@@ -89,6 +89,7 @@ export default function Blog() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                my: 10,
               }}
             >
               <CircularProgress />

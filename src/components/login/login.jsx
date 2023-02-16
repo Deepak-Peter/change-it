@@ -71,14 +71,13 @@ function Login() {
   // const [email,setEmail]=useState();
   // const [password,setPassword]=useState();
 
-
   return (
     <Box sx={{ display: "flex" }}>
       <Box
         sx={{
           width: "100%",
           height: "100vh",
-          background: "url(/img/bg1.png) no-repeat center center fixed",
+          background: "url(/img/login_bg.jpg) no-repeat center center fixed",
           backgroundSize: "cover",
         }}
       >
@@ -106,24 +105,29 @@ function Login() {
               onSubmit={formik.handleSubmit}
               style={{ width: "100%", maxWidth: "80%" }}
             >
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href=""
-                sx={{
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "skyblue",
-                  textDecoration: "none",
-                  mb: 5,
-                }}
-              >
-                BLOGZ
-              </Typography>
-              <Typography variant="h4" sx={{ color: "#027DB5" }}>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
+                <Box
+                  component="img"
+                  src="/img/main-logo.png"
+                  sx={{ width: "30px", mr: 1 }}
+                />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    color: "#212121",
+                    textDecoration: "none",
+                  }}
+                >
+                  BLOGZ
+                </Typography>
+              </Box>
+              <Typography variant="h4" color="error">
                 Welcome,
                 <br /> let's get started!
               </Typography>
@@ -135,7 +139,7 @@ function Login() {
                 please{" "}
                 <Link
                   to="/register"
-                  style={{ textDecoration: "none", color: "#027DB5" }}
+                  style={{ textDecoration: "none", color: "#D32F2F" }}
                 >
                   Sign Up
                 </Link>{" "}
@@ -214,9 +218,16 @@ function Login() {
               <Button
                 variant="contained"
                 type="submit"
-                color="primary"
                 className="form__custom-button"
-                sx={{ boxShadow: "none", py: 1.5, borderRadius: 3 }}
+                sx={{
+                  boxShadow: "none",
+                  py: 1.5,
+                  borderRadius: 3,
+                  backgroundColor: "#4d4c4c",
+                  "&:hover": {
+                    backgroundColor: "#333333",
+                  },
+                }}
               >
                 Log in
               </Button>

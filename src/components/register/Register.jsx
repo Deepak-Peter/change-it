@@ -45,23 +45,29 @@ export const Register = () => {
               onSubmit={(event) => event.preventDefault()}
               style={{ width: "100%", maxWidth: "80%" }}
             >
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href=""
-                sx={{
-                  flexGrow: 1,
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "skyblue",
-                  textDecoration: "none",
-                }}
-              >
-                BLOGZ
-              </Typography>
-              <Typography variant="h4" sx={{ color: "#027DB5", mt: 5 }}>
+              <Box sx={{ display: "flex", alignItems: "center", mb: 5 }}>
+                <Box
+                  component="img"
+                  src="/img/main-logo.png"
+                  sx={{ width: "30px", mr: 1 }}
+                />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  sx={{
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    color: "#212121",
+                    textDecoration: "none",
+                  }}
+                >
+                  BLOGZ
+                </Typography>
+              </Box>
+              <Typography variant="h4" color="error" sx={{ mt: 5 }}>
                 Welcome,
                 <br />
                 let's get the ball rolling!
@@ -73,9 +79,9 @@ export const Register = () => {
                 Please use the form to register. If you are a member, please{" "}
                 <Link
                   to="/login"
-                  style={{ textDecoration: "none", color: "#027DB5" }}
+                  style={{ textDecoration: "none", color: "#D32F2F" }}
                 >
-                  login
+                  Login
                 </Link>{" "}
                 .
               </Typography>
@@ -131,6 +137,10 @@ export const Register = () => {
                     py: 1.5,
                     borderRadius: 3,
                     width: "100%",
+                    backgroundColor: "#4d4c4c",
+                    "&:hover": {
+                      backgroundColor: "#333333",
+                    },
                   }}
                 >
                   Register
