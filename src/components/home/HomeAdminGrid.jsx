@@ -16,23 +16,37 @@ import { BlogSnackbar } from "../snackbar/BlogSnackbar";
 export const HomeAdminGrid = (props) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const handleClick = () => {
-    setOpen(true);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
 
-    setOpen(false);
-  };
-  const onReject = async (id) => {
+  const onDelete = async (id) => {
     setOpen(true);
     setMessage("Rejected successfully");
     await fetch(
       `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${id}`,
       {
         method: "DELETE", // *GET, POST, PUT, DELETE, etc.
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        // setBlogs(data);
+
+        window.location.reload();
+      });
+  };
+
+  const onReject = async (id) => {
+    setOpen(true);
+    setMessage("Rejected successfully");
+
+    const data = {
+      approved: false,
+      reviewed: true,
+    };
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${id}`,
+      {
+        method: "PUT", // *GET, POST, PUT, DELETE, etc.
+        body: JSON.stringify(data),
       }
     )
       .then((response) => response.json())
@@ -66,12 +80,7 @@ export const HomeAdminGrid = (props) => {
   };
   return (
     <Grid item lg={4} md={6} xs={12}>
-      <BlogSnackbar
-        open={open}
-        handleClick={handleClick}
-        handleClose={handleClose}
-        message={message}
-      />
+      <BlogSnackbar open={open} message={message} />
       <Card
         sx={{
           boxShadow: "0px 4px 12px rgba(17, 24, 39, 0.12)",
@@ -153,7 +162,28 @@ export const HomeAdminGrid = (props) => {
               mt: 2,
             }}
           >
-            {props.data?.approved ? (
+            {props.data?.approved === false && props.data?.reviewed == true ? (
+              <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  href={`/blog/${props?.data?.id}`}
+                  sx={{
+                    backgroundColor: "#4d4c4c",
+                    "&:hover": {
+                      backgroundColor: "#333333",
+                    },
+                  }}
+                >
+                  Read
+                </Button>
+                <Chip
+                  label="Rejected"
+                  color="error"
+                  icon={<DoneAllRoundedIcon />}
+                />
+              </Stack>
+            ) : props.data?.approved ? (
               <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                 <Button
                   fullWidth

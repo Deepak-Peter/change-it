@@ -16,16 +16,22 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import React, { useEffect, useState } from "react";
 import { HomeAdminGrid } from "./HomeAdminGrid";
 import CircularProgress from "@mui/material/CircularProgress";
+import { HomeUserCard } from "./HomeUserCard";
 
 export default function Home() {
   const user = localStorage.getItem("isLoggedIn");
   const [blogs, setBlogs] = useState();
+  const [yourblogs, setYourBlogs] = useState();
 
   const getBlogs = async () => {
     await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
       .then((response) => response.json())
       .then((data) => {
-        setBlogs(data.reverse());
+        setBlogs(data);
+        const yourBlogs = data?.filter((ele) => {
+          return ele.signature[0] === localStorage.getItem("blogUser");
+        });
+        setYourBlogs(yourBlogs);
       });
   };
 
@@ -114,7 +120,7 @@ export default function Home() {
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Blogs Uploaded</p>
-                    <h1>10</h1>
+                    <h1>{blogs?.length}</h1>
                   </div>
                 </div>
 
@@ -141,7 +147,11 @@ export default function Home() {
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Approved Blogs</p>
-                    <h1>10</h1>
+                    <h1>
+                      {(blogs?.filter((ele) => {
+                        return ele.approved === true;
+                      }))?.length}
+                    </h1>
                   </div>
                 </div>
                 <div
@@ -159,6 +169,35 @@ export default function Home() {
                 </div>
               </div>
 
+
+              <div className="card-banner">
+                <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
+                  <div className="card-icon">
+                    <img src="/svg/red-rejected.svg" alt="rover" />
+                  </div>
+                  <div className="card-title">
+                    {/* <span className="tag tag-teal">Technology</span> */}
+                    <p style={{ marginTop: "10px" }}>No Actions Taken By Admin</p>
+                    <h1>  {(blogs?.filter((ele) => {
+                        return ele.reviewed === false && ele.approved==false;
+                      }))?.length}</h1>
+                  </div>
+                </div>
+                <div
+                  className="user"
+                  style={{ width: "100%", marginTop: "16px" }}
+                >
+                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
+                    <button className="button" type="button">
+                      See All Rejected
+                    </button>
+                    <button className="button-danger" type="button">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div className="card-banner">
                 <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
                   <div className="card-icon">
@@ -167,7 +206,9 @@ export default function Home() {
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Rejected Blogs</p>
-                    <h1>10</h1>
+                    <h1>  {(blogs?.filter((ele) => {
+                        return ele.approved === false && ele.reviewed===true;
+                      }))?.length}</h1>
                   </div>
                 </div>
                 <div
@@ -189,120 +230,22 @@ export default function Home() {
             <div className="title">
               <h2>My Blogs</h2>
             </div>
-
-            <div className="card">
-              <div className="card-header">
-                <img
-                  src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg"
-                  alt="rover"
-                />
-              </div>
-              <div className="card-body">
-                <div className="user-info" style={{ marginBottom: "10px" }}>
-                  <small>1w ago</small>
-                </div>
-                {/* <span className="tag tag-teal">Technology</span> */}
-                <h4>Why is the Tesla Cybertruck designed the way it is?</h4>
-                <p style={{ marginTop: "10px" }}>
-                  An exploration into the truck's polarising design
-                </p>
-                <div className="user" style={{ width: "100%" }}>
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      Edit
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-header">
-                <img
-                  src="https://www.newsbtc.com/wp-content/uploads/2020/06/mesut-kaya-LcCdl__-kO0-unsplash-scaled.jpg"
-                  alt="ballons"
-                />
-              </div>
-
-              <div className="card-body">
-                {/* <span className="tag tag-purple">Popular</span> */}
-                <div className="user-info" style={{ marginBottom: "10px" }}>
-                  <small>1w ago</small>
-                </div>
-                <h4>How to Keep Going When You Don’t Know What’s Next</h4>
-                <p style={{ marginTop: "10px" }}>
-                  The future can be scary, but there are ways to deal with that
-                  fear.
-                </p>
-                <div className="user" style={{ width: "100%" }}>
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      Edit
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-header">
-                <img
-                  src="https://images6.alphacoders.com/312/thumb-1920-312773.jpg"
-                  alt="city"
-                />
-              </div>
-              <div className="card-body">
-                <div className="user-info" style={{ marginBottom: "10px" }}>
-                  <small>1w ago</small>
-                </div>
-                {/* <span className="tag tag-pink">Design</span> */}
-                <h4>10 Rules of Dashboard Design</h4>
-                <p style={{ marginTop: "10px" }}>Dashboard Design Guidelines</p>
-                <div className="user" style={{ width: "100%" }}>
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      Edit
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-header">
-                <img
-                  src="https://images6.alphacoders.com/312/thumb-1920-312773.jpg"
-                  alt="city"
-                />
-              </div>
-              <div className="card-body">
-                <div className="user-info" style={{ marginBottom: "10px" }}>
-                  <small>1w ago</small>
-                </div>
-                {/* <span className="tag tag-pink">Design</span> */}
-                <h4>10 Rules of Dashboard Design</h4>
-                <p style={{ marginTop: "10px" }}>Dashboard Design Guidelines</p>
-                <div className="user" style={{ width: "100%" }}>
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      Edit
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {blogs ? (
+              blogs?.map((ele) => {
+                return <HomeUserCard data={ele} />;
+              })
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  my: 10,
+                }}
+              >
+                <CircularProgress color="error" />
+              </Box>
+            )}
           </div>
         </>
       )}

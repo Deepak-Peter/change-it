@@ -80,7 +80,10 @@ export const BlogCreate = () => {
       approved: false,
       submit: null,
     },
-    validationSchema: Yup.object({}),
+    validationSchema: Yup.object({
+      title: Yup.string().required("Title is required"),
+      content1: Yup.string().required("Content is required"),
+    }),
     onSubmit: async (values) => {
       try {
         onSubmitAPICall(values);
@@ -121,6 +124,8 @@ export const BlogCreate = () => {
             <Typography variant="h6">Basic details</Typography>
             <Box sx={{ mt: 3 }}>
               <TextField
+                error={Boolean(formik.touched.title && formik.errors.title)}
+                helperText={formik.touched.title && formik.errors.title}
                 fullWidth
                 label="Post title"
                 name="title"
@@ -244,6 +249,8 @@ export const BlogCreate = () => {
               Content
             </Typography>
             <TextField
+              error={Boolean(formik.touched.content1 && formik.errors.content1)}
+              helperText={formik.touched.content1 && formik.errors.content1}
               fullWidth
               rows={5}
               variant="outlined"
