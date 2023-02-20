@@ -23,13 +23,13 @@ const pages =
     ? [
         { name: "Home", link: "/home" },
         { name: "Blog", link: "/blog" },
-        { name: "Pending Requests", link: "/pending" },
+        // { name: "Pending Requests", link: "/pending" },
         { name: "Profile", link: "/profile" },
       ]
     : [
         { name: "Home", link: "/home" },
         { name: "About", link: "/about" },
-        { name: "Contact", link: "/contact" },
+        { name: "Profile", link: "/profile" },
       ];
 const settings = user
   ? [

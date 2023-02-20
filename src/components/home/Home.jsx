@@ -120,21 +120,7 @@ export default function Home() {
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Blogs Uploaded</p>
-                    <h1>{blogs?.length}</h1>
-                  </div>
-                </div>
-
-                <div
-                  className="user"
-                  style={{ width: "100%", marginTop: "16px" }}
-                >
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      See All Blogs
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
+                    <h1>{yourblogs?.length}</h1>
                   </div>
                 </div>
               </div>
@@ -148,27 +134,15 @@ export default function Home() {
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Approved Blogs</p>
                     <h1>
-                      {(blogs?.filter((ele) => {
-                        return ele.approved === true;
-                      }))?.length}
+                      {
+                        yourblogs?.filter((ele) => {
+                          return ele.approved === true;
+                        })?.length
+                      }
                     </h1>
                   </div>
                 </div>
-                <div
-                  className="user"
-                  style={{ width: "100%", marginTop: "16px" }}
-                >
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      See All Pendings
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
-                  </div>
-                </div>
               </div>
-
 
               <div className="card-banner">
                 <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
@@ -177,23 +151,17 @@ export default function Home() {
                   </div>
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
-                    <p style={{ marginTop: "10px" }}>No Actions Taken By Admin</p>
-                    <h1>  {(blogs?.filter((ele) => {
-                        return ele.reviewed === false && ele.approved==false;
-                      }))?.length}</h1>
-                  </div>
-                </div>
-                <div
-                  className="user"
-                  style={{ width: "100%", marginTop: "16px" }}
-                >
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      See All Rejected
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
+                    <p style={{ marginTop: "10px" }}>Pending Blogs</p>
+                    <h1>
+                      {" "}
+                      {
+                        yourblogs?.filter((ele) => {
+                          return (
+                            ele.reviewed === false && ele.approved == false
+                          );
+                        })?.length
+                      }
+                    </h1>
                   </div>
                 </div>
               </div>
@@ -206,32 +174,26 @@ export default function Home() {
                   <div className="card-title">
                     {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Rejected Blogs</p>
-                    <h1>  {(blogs?.filter((ele) => {
-                        return ele.approved === false && ele.reviewed===true;
-                      }))?.length}</h1>
-                  </div>
-                </div>
-                <div
-                  className="user"
-                  style={{ width: "100%", marginTop: "16px" }}
-                >
-                  <div style={{ display: "flex", gap: 10, width: "100%" }}>
-                    <button className="button" type="button">
-                      See All Rejected
-                    </button>
-                    <button className="button-danger" type="button">
-                      Delete
-                    </button>
+                    <h1>
+                      {" "}
+                      {
+                        yourblogs?.filter((ele) => {
+                          return (
+                            ele.approved === false && ele.reviewed === true
+                          );
+                        })?.length
+                      }
+                    </h1>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="title">
+            <div className="title" style={{ marginBottom: "10px" }}>
               <h2>My Blogs</h2>
             </div>
-            {blogs ? (
-              blogs?.map((ele) => {
+            {yourblogs ? (
+              yourblogs?.map((ele) => {
                 return <HomeUserCard data={ele} />;
               })
             ) : (

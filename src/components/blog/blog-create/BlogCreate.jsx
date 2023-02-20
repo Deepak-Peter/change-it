@@ -14,6 +14,7 @@ import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { PopupModal } from "../../modal/popupModal";
+import { useNavigate } from "react-router-dom";
 
 export const BlogCreate = () => {
   const [img, setImg] = useState();
@@ -34,6 +35,7 @@ export const BlogCreate = () => {
   const handleClose = () => {
     setPopupOpen(false);
   };
+  const navigate = useNavigate();
 
   const onSubmitAPICall = async (values) => {
     const data = {
@@ -64,6 +66,7 @@ export const BlogCreate = () => {
         // setBlogs(data);
         // alert("blog submitted");
         setPopupOpen(true);
+        navigate("/blog", { replace: true });
       });
   };
 
@@ -300,7 +303,7 @@ export const BlogCreate = () => {
             Cancel
           </Button>
 
-          <Link href="/blog" passHref style={{ textDecoration: "none" }}>
+          <Link style={{ textDecoration: "none" }}>
             <Button
               type="submit"
               color="error"

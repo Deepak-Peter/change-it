@@ -16,7 +16,7 @@ export const Register = () => {
         sx={{
           width: "100%",
           height: "100vh",
-          background: "url(/img/bg-blue.webp) no-repeat center center fixed",
+          background: "url(/img/login_bg.jpg) no-repeat center center fixed",
           backgroundSize: "cover",
         }}
       >

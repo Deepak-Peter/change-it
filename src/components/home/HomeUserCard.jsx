@@ -1,5 +1,7 @@
+import { Chip } from "@mui/material";
 import React, { useState } from "react";
 import { BlogSnackbar } from "../snackbar/BlogSnackbar";
+import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
 
 export const HomeUserCard = (props) => {
   const [open, setOpen] = useState(false);
@@ -24,19 +26,33 @@ export const HomeUserCard = (props) => {
     <div className="card">
       <BlogSnackbar open={open} message={message} />
       <div className="card-header">
-        <img
-          src={`${props.data.imagestr}`}
-          alt="ballons"
-        />
+        <img src={`${props.data.imagestr}`} alt="ballons" />
       </div>
 
       <div className="card-body">
         {/* <span className="tag tag-purple">Popular</span> */}
         <div className="user-info" style={{ marginBottom: "10px" }}>
           <small>1w ago</small>
+          {props.data?.approved === false && props.data?.reviewed === true && (
+            <Chip
+              label="Rejected"
+              color="error"
+              size="small"
+              icon={<DoneAllRoundedIcon />}
+              sx={{ ml: 2 }}
+            />
+          )}
         </div>
         <h4>{props.data?.title}</h4>
-        <p style={{ marginTop: "10px" }}>{props.data.content[0]}</p>
+        <p
+          className="para-line-clamp"
+          style={{
+            marginTop: "10px",
+          }}
+        >
+          {props.data.content[0]}
+        </p>
+
         <div className="user" style={{ width: "100%" }}>
           <div style={{ display: "flex", gap: 10, width: "100%" }}>
             <button className="button" type="button">

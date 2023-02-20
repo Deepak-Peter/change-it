@@ -33,7 +33,7 @@
 .card-main {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 90%;
 }
 
 .card-banner {
@@ -110,6 +110,13 @@
   color: #545d7a;
 }
 
+.para-line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 hr.solid {
   border-top: 1px solid #bbb;
   margin: 10px 0px;
@@ -176,7 +183,8 @@ hr.solid {
     border-radius: 16px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    flex: 0 0 calc(30% - 1em);
+    /* flex: 0 0 calc(30% - 2em); */
+    width: 100% !important;
   }
 }
 
