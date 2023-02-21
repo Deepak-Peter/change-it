@@ -19,8 +19,7 @@ export default function Blog() {
   const [blogs, setBlogs] = useState();
 
   const getBlogs = async () => {
-    // await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
-    await fetch("http://localhost:9000/.netlify/functions/blog")
+    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.reverse());
