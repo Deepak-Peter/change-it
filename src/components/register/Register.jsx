@@ -42,8 +42,7 @@ export const Register = () => {
           password: values.password,
         };
         await fetch(
-          // "https://zpworkshopapis.netlify.app/.netlify/functions/account/signup",
-          "http://localhost:9000/.netlify/functions/account/signup",
+          "https://zpworkshopapis.netlify.app/.netlify/functions/account/signup",
           {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: JSON.stringify(data), // body data type must match "Content-Type" header

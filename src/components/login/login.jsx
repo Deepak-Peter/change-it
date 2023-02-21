@@ -57,8 +57,7 @@ function Login() {
             password: values.password,
           };
           await fetch(
-            // "https://zpworkshopapis.netlify.app/.netlify/functions/account/login",
-            "http://localhost:9000/.netlify/functions/account/login",
+            "https://zpworkshopapis.netlify.app/.netlify/functions/account/login",
             {
               method: "POST", // *GET, POST, PUT, DELETE, etc.
               body: JSON.stringify(data), // body data type must match "Content-Type" header
