@@ -24,7 +24,9 @@ export default function Home() {
   const [yourblogs, setYourBlogs] = useState();
 
   const getBlogs = async () => {
-    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
+    // await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
+    await fetch("http://localhost:9000/.netlify/functions/blog")
+
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data);
@@ -110,7 +112,7 @@ export default function Home() {
             </Box>
           </Container>
 
-          {/* <div className="container">
+          <div className="container">
             <div className="card-main">
               <div className="card-banner">
                 <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
@@ -204,7 +206,7 @@ export default function Home() {
                 <CircularProgress color="error" />
               </Box>
             )}
-          </div> */}
+          </div>
         </>
       )}
     </>

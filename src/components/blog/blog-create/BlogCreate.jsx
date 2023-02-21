@@ -48,7 +48,9 @@ export const BlogCreate = () => {
       approved: values.approved,
     };
 
-    await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog", {
+    // await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog", {
+    await fetch("http://localhost:9000/.netlify/functions/blog", {
+
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       // mode: 'cors', // no-cors, *cors, same-origin
       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -207,7 +209,6 @@ export const BlogCreate = () => {
                   id="select-image"
                   style={{ display: "none" }}
                   onChange={(e) => {
-                    debugger;
                     var reader = new FileReader();
                     reader.readAsDataURL(e.target.files[0]);
                     console.log(reader, "readre");

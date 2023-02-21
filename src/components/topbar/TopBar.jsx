@@ -114,7 +114,6 @@ function TopBar() {
   };
 
   const handleCloseUserMenu = (ele) => {
-    debugger;
     setAnchorElUser(null);
     if (ele === "Logout") {
       localStorage.removeItem("isLoggedIn");
@@ -249,7 +248,18 @@ function TopBar() {
               <Box sx={{ flexGrow: 0, ml: 2 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" sx={{ width: 30, height: 30 }} />
+                    {/* <Avatar alt="Remy Sharp" sx={{ width: 30, height: 30 }} /> */}
+                    <Avatar
+                      sx={{
+                        background: "#fc818e",
+                        width: 30,
+                        height: 30,
+                        textTransform: "uppercase",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {localStorage.getItem("isLoggedIn")?.substring(0, 1)}
+                    </Avatar>
                   </IconButton>
                 </Tooltip>
 
@@ -269,6 +279,8 @@ function TopBar() {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
+                  <Typography>{localStorage.getItem("isLoggedIn")}</Typography>
+
                   {settings.map((setting) => (
                     <Link
                       to={`${setting.link}`}

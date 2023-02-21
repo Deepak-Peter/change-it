@@ -1,11 +1,13 @@
 import { Chip } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BlogSnackbar } from "../snackbar/BlogSnackbar";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
 
 export const HomeUserCard = (props) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [data, setData] = useState();
+
   const onDelete = async (id) => {
     setOpen(true);
     setMessage("Deleted successfully");
@@ -22,18 +24,31 @@ export const HomeUserCard = (props) => {
         window.location.reload();
       });
   };
+  const getDetails = async () => {
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${props.data.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      });
+  };
+
+  useEffect(() => {
+    getDetails();
+  }, []);
   return (
     <div className="card">
       <BlogSnackbar open={open} message={message} />
       <div className="card-header">
-        <img src={`${props.data.imagestr}`} alt="ballons" />
+        <img src={`${data?.imagestr}`} alt="ballons" />
       </div>
 
       <div className="card-body">
         {/* <span className="tag tag-purple">Popular</span> */}
         <div className="user-info" style={{ marginBottom: "10px" }}>
           <small>1w ago</small>
-          {props.data?.approved === false && props.data?.reviewed === true && (
+          {data?.approved === false && data?.reviewed === true && (
             <Chip
               label="Rejected"
               color="error"
@@ -43,14 +58,14 @@ export const HomeUserCard = (props) => {
             />
           )}
         </div>
-        <h4>{props.data?.title}</h4>
+        <h4>{data?.title}</h4>
         <p
           className="para-line-clamp"
           style={{
             marginTop: "10px",
           }}
         >
-          {props.data.content[0]}
+          {data?.content[0]}
         </p>
 
         <div className="user" style={{ width: "100%" }}>
@@ -61,7 +76,7 @@ export const HomeUserCard = (props) => {
             <button
               className="button-danger"
               type="button"
-              onClick={() => onDelete(props.data.id)}
+              onClick={() => onDelete(data?.id)}
             >
               Delete
             </button>
