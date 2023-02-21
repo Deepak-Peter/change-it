@@ -35,7 +35,6 @@ export const Register = () => {
         .required("Password is required"),
     }),
     onSubmit: async (values) => {
-      debugger;
       try {
         const data = {
           name: values.name,
@@ -43,7 +42,8 @@ export const Register = () => {
           password: values.password,
         };
         await fetch(
-          "https://zpworkshopapis.netlify.app/.netlify/functions/account/signup",
+          // "https://zpworkshopapis.netlify.app/.netlify/functions/account/signup",
+          "http://localhost:9000/.netlify/functions/account/signup",
           {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: JSON.stringify(data), // body data type must match "Content-Type" header
@@ -52,9 +52,12 @@ export const Register = () => {
           .then((response) => response.json())
           .then((data) => {
             // setBlogs(data);
-            alert("User Registered");
-            // setPopupOpen(true);
-            navigate("/login", { replace: true });
+            if (data.statusCode === 200) {
+              alert("User Registered");
+              navigate("/login", { replace: true });
+            } else if (data.statusCode === 400) {
+              alert("User already exist");
+            }
           });
         // postUser(regData);
       } catch (err) {

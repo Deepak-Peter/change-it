@@ -13,8 +13,11 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -43,21 +46,39 @@ function Login() {
     onSubmit: async (values) => {
       try {
         if (
-          values.username === "ravi@gmail.com" &&
-          values.password === "P@ssW0rd"
-        ) {
-          alert("login success");
-          localStorage.setItem("isLoggedIn", "user");
-          window.location.reload();
-        } else if (
           values.username === "admin@gmail.com" &&
           values.password === "P@ssW0rd"
         ) {
           localStorage.setItem("isLoggedIn", "admin");
           window.location.reload();
+        } else if (values.username !== "" && values.password !== "") {
+          const data = {
+            username: values.username,
+            password: values.password,
+          };
+          await fetch(
+            // "https://zpworkshopapis.netlify.app/.netlify/functions/account/login",
+            "http://localhost:9000/.netlify/functions/account/login",
+            {
+              method: "POST", // *GET, POST, PUT, DELETE, etc.
+              body: JSON.stringify(data), // body data type must match "Content-Type" header
+            }
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              // setBlogs(data);
+              if (data.statusCode === 200) {
+                alert("login success");
+                localStorage.setItem("isLoggedIn", "user");
+                window.location.reload();
+                navigate("/home", { replace: true });
+              } else if (data.statusCode === 400) {
+                alert("Please enter correct username and password");
+              }
+            });
         }
-        const user=values.username.split("@");
-        localStorage.setItem('blogUser',user[0]);
+        const user = values.username.split("@");
+        localStorage.setItem("blogUser", user[0]);
         // postUser(regData);
       } catch (err) {
         console.error(err);
