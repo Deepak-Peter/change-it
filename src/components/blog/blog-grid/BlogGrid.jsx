@@ -112,7 +112,7 @@ export const BlogGrid = (props) => {
                 alignItems: "center",
               }}
             >
-              <Box sx={{ display: "flex", columnGap: 1 }}>
+              <Box sx={{ display: "flex", alignItems: "center", columnGap: 1 }}>
                 <Avatar
                   sx={{
                     background: "#fc818e",
@@ -124,9 +124,14 @@ export const BlogGrid = (props) => {
                 >
                   {data?.signature[0]?.substring(0, 1)}
                 </Avatar>
-                <Typography variant="subtitle1" sx={{ color: "#696969" }}>
-                  By {data?.signature[0]} • {data?.createdAt}
-                </Typography>
+                <Box>
+                  <Typography variant="subtitle1" sx={{ color: "#696969" }}>
+                    By {data?.signature[0]}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "#696969" }}>
+                    {data?.createdAt}
+                  </Typography>
+                </Box>
               </Box>
               <Box>
                 <Typography variant="body2" sx={{ color: "#8c8c8c" }}>

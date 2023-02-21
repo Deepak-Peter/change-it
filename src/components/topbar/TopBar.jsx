@@ -16,6 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import { Outlet, Link } from "react-router-dom";
+import { Divider } from "@mui/material";
 
 const user = localStorage.getItem("isLoggedIn");
 const pages =
@@ -258,13 +259,13 @@ function TopBar() {
                         fontSize: "14px",
                       }}
                     >
-                      {localStorage.getItem("isLoggedIn")?.substring(0, 1)}
+                      {localStorage.getItem("blogUser")?.substring(0, 1)}
                     </Avatar>
                   </IconButton>
                 </Tooltip>
 
                 <Menu
-                  sx={{ mt: "45px" }}
+                  sx={{ mt: "35px" }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
@@ -278,8 +279,37 @@ function TopBar() {
                   }}
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
+                  PaperProps={{ sx: { minWidth: 150 } }}
                 >
-                  <Typography>{localStorage.getItem("isLoggedIn")}</Typography>
+                  <Box
+                    sx={{
+                      mx: 2,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        color: "error.main",
+                        textTransform: "capitalize",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {localStorage.getItem("blogUser")}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: "#969595",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      ({localStorage.getItem("isLoggedIn")})
+                    </Typography>
+                  </Box>
+                  <Divider sx={{ my: 1 }} />
 
                   {settings.map((setting) => (
                     <Link
