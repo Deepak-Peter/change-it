@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Chip, Skeleton } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { BlogSnackbar } from "../snackbar/BlogSnackbar";
 import DoneAllRoundedIcon from "@mui/icons-material/DoneAllRounded";
@@ -7,6 +7,7 @@ export const HomeUserCard = (props) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
   const onDelete = async (id) => {
     setOpen(true);
@@ -38,51 +39,60 @@ export const HomeUserCard = (props) => {
     getDetails();
   }, []);
   return (
-    <div className="card">
-      <BlogSnackbar open={open} message={message} />
-      <div className="card-header">
-        <img src={`${data?.imagestr}`} alt="ballons" />
-      </div>
+    <>
+      <div className="card">
+        <BlogSnackbar open={open} message={message} />
+        {data?.imagestr ? (
+          <div className="card-header">
+            <img src={`${data?.imagestr}`} alt="ballons" />
+          </div>
+        ) : (
+          <Skeleton
+            variant="rectangular"
+            sx={{ width: "100%", height: "70%" }}
+          />
+        )}
 
-      <div className="card-body">
-        {/* <span className="tag tag-purple">Popular</span> */}
-        <div className="user-info" style={{ marginBottom: "10px" }}>
-          <small>1w ago</small>
-          {data?.approved === false && data?.reviewed === true && (
-            <Chip
-              label="Rejected"
-              color="error"
-              size="small"
-              icon={<DoneAllRoundedIcon />}
-              sx={{ ml: 2 }}
-            />
-          )}
-        </div>
-        <h4>{data?.title}</h4>
-        <p
-          className="para-line-clamp"
-          style={{
-            marginTop: "10px",
-          }}
-        >
-          {data?.content[0]}
-        </p>
+        <div className="card-body">
+          {/* <span className="tag tag-purple">Popular</span> */}
+          <div className="user-info" style={{ marginBottom: "10px" }}>
+            <small>1w ago</small>
+            {data?.approved === false && data?.reviewed === true && (
+              <Chip
+                label="Rejected"
+                color="error"
+                size="small"
+                icon={<DoneAllRoundedIcon />}
+                sx={{ ml: 2 }}
+              />
+            )}
+          </div>
+          <h4>{data?.title}</h4>
+          <p
+            className="para-line-clamp"
+            style={{
+              marginTop: "10px",
+            }}
+          >
+            {data?.content[0]}
+          </p>
 
-        <div className="user" style={{ width: "100%" }}>
-          <div style={{ display: "flex", gap: 10, width: "100%" }}>
-            <button className="button" type="button">
-              Edit
-            </button>
-            <button
-              className="button-danger"
-              type="button"
-              onClick={() => onDelete(data?.id)}
-            >
-              Delete
-            </button>
+          <div className="user" style={{ width: "100%" }}>
+            <div style={{ display: "flex", gap: 10, width: "100%" }}>
+              <button className="button" type="button">
+                Edit
+              </button>
+              <button
+                className="button-danger"
+                type="button"
+                onClick={() => onDelete(data?.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
