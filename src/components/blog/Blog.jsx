@@ -20,6 +20,7 @@ export default function Blog() {
 
   const getBlogs = async () => {
     await fetch("https://zpworkshopapis.netlify.app/.netlify/functions/blog")
+    // await fetch("http://localhost:9000/.netlify/functions/blog")
       .then((response) => response.json())
       .then((data) => {
         setBlogs(data.reverse());
@@ -81,8 +82,9 @@ export default function Blog() {
         >
           {blogs ? (
             blogs?.reverse().map((ele) => {
-              if (ele.approved) return <BlogGrid ele={ele} />;
-              else return <></>;
+              // if (ele.approved) return <BlogGrid ele={ele} />;
+              // else return <></>;
+              return <BlogGrid ele={ele} />;
             })
           ) : (
             <Box

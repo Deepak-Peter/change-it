@@ -110,7 +110,7 @@ export default function Home() {
             </Box>
           </Container>
 
-          <div className="container">
+          {/* <div className="container">
             <div className="card-main">
               <div className="card-banner">
                 <div style={{ display: "flex", gap: 30, alignItems: "center" }}>
@@ -118,7 +118,6 @@ export default function Home() {
                     <img src="/svg/green-check.svg" alt="rover" />
                   </div>
                   <div className="card-title">
-                    {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Blogs Uploaded</p>
                     <h1>{yourblogs?.length}</h1>
                   </div>
@@ -131,7 +130,6 @@ export default function Home() {
                     <img src="/svg/blue-warning.svg" alt="rover" />
                   </div>
                   <div className="card-title">
-                    {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Approved Blogs</p>
                     <h1>
                       {
@@ -150,7 +148,6 @@ export default function Home() {
                     <img src="/svg/red-rejected.svg" alt="rover" />
                   </div>
                   <div className="card-title">
-                    {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Pending Blogs</p>
                     <h1>
                       {" "}
@@ -172,7 +169,6 @@ export default function Home() {
                     <img src="/svg/red-rejected.svg" alt="rover" />
                   </div>
                   <div className="card-title">
-                    {/* <span className="tag tag-teal">Technology</span> */}
                     <p style={{ marginTop: "10px" }}>Rejected Blogs</p>
                     <h1>
                       {" "}
@@ -208,7 +204,7 @@ export default function Home() {
                 <CircularProgress color="error" />
               </Box>
             )}
-          </div>
+          </div> */}
         </>
       )}
     </>

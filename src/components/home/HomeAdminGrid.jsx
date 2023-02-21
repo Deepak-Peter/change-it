@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -16,6 +16,7 @@ import { BlogSnackbar } from "../snackbar/BlogSnackbar";
 export const HomeAdminGrid = (props) => {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [data, setData] = useState();
 
   const onDelete = async (id) => {
     setOpen(true);
@@ -78,6 +79,21 @@ export const HomeAdminGrid = (props) => {
         window.location.reload();
       });
   };
+
+
+  const getDetails = async () => {
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${props.data.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      });
+  };
+
+  useEffect(() => {
+    getDetails();
+  }, []);
   return (
     <Grid item lg={4} md={6} xs={12}>
       <BlogSnackbar open={open} message={message} />
@@ -91,7 +107,7 @@ export const HomeAdminGrid = (props) => {
         <Box>
           <Box
             sx={{
-              backgroundImage: `url(${props.data.imagestr})`,
+              backgroundImage: `url(${data?.imagestr})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               display: "block",
@@ -110,11 +126,11 @@ export const HomeAdminGrid = (props) => {
               overflow: "hidden",
             }}
           >
-            {props.data?.title}
+            {data?.title}
           </Typography>
           <Box sx={{ my: 1 }}>
             <Chip
-              label={props.data?.category}
+              label={data?.category}
               color="error"
               size="small"
               sx={{ px: 0.5 }}
@@ -138,14 +154,14 @@ export const HomeAdminGrid = (props) => {
                   fontSize: "14px",
                 }}
               >
-                {props?.data?.signature[0]?.substring(0, 1)}
+                {data?.signature[0]?.substring(0, 1)}
               </Avatar>
               <Box>
                 <Typography variant="subtitle1" sx={{ color: "#696969" }}>
-                  By {props?.data?.signature[0]}
+                  By {data?.signature[0]}
                 </Typography>
                 <Typography variant="caption">
-                  {props?.data?.createdAt}
+                  {data?.createdAt}
                 </Typography>
               </Box>
             </Box>
@@ -162,7 +178,7 @@ export const HomeAdminGrid = (props) => {
               mt: 2,
             }}
           >
-            {props.data?.approved === false && props.data?.reviewed == true ? (
+            {data?.approved === false && data?.reviewed == true ? (
               <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                 <Button
                   fullWidth
@@ -183,12 +199,12 @@ export const HomeAdminGrid = (props) => {
                   icon={<DoneAllRoundedIcon />}
                 />
               </Stack>
-            ) : props.data?.approved ? (
+            ) : data?.approved ? (
               <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
                 <Button
                   fullWidth
                   variant="contained"
-                  href={`/blog/${props?.data?.id}`}
+                  href={`/blog/${data?.id}`}
                   sx={{
                     backgroundColor: "#4d4c4c",
                     "&:hover": {
@@ -209,7 +225,7 @@ export const HomeAdminGrid = (props) => {
                 <Button
                   fullWidth
                   variant="contained"
-                  href={`/blog/${props?.data?.id}`}
+                  href={`/blog/${data?.id}`}
                   sx={{
                     backgroundColor: "#4d4c4c",
                     "&:hover": {
@@ -224,7 +240,7 @@ export const HomeAdminGrid = (props) => {
                   variant="outlined"
                   color="success"
                   onClick={() => {
-                    onApprove(props?.data?.id);
+                    onApprove(data?.id);
                   }}
                 >
                   Approve
@@ -234,7 +250,7 @@ export const HomeAdminGrid = (props) => {
                   variant="outlined"
                   color="error"
                   onClick={() => {
-                    onReject(props?.data?.id);
+                    onReject(data?.id);
                   }}
                 >
                   Reject

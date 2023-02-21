@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 
 export const BlogGrid = (props) => {
   const [id, setId] = useState();
+  const [data, setData] = useState();
 
   const onReject = async (id) => {
     await fetch(
@@ -49,7 +50,21 @@ export const BlogGrid = (props) => {
       });
   };
 
-  return (
+  const getDetails = async () => {
+    await fetch(
+      `https://zpworkshopapis.netlify.app/.netlify/functions/blog/${props.ele.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      });
+  };
+
+  useEffect(() => {
+    getDetails();
+  }, []);
+
+  return data?.approved ? (
     <Grid
       item
       lg={6}
@@ -68,13 +83,10 @@ export const BlogGrid = (props) => {
           to={`/blog/${props.ele.id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
-          {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
           <Box>
-            {/* <img src={`${props.ele.imagestr}`} alt={"np"}/> */}
-
             <Box
               sx={{
-                backgroundImage: `url(${props.ele.imagestr})`,
+                backgroundImage: `url(${data?.imagestr})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 display: "block",
@@ -83,10 +95,10 @@ export const BlogGrid = (props) => {
             />
           </Box>
           <Box sx={{ p: 2 }}>
-            <Typography variant="h6">{props.ele.title}</Typography>
+            <Typography variant="h6">{data?.title}</Typography>
             <Box sx={{ my: 1 }}>
               <Chip
-                label={props.ele.category}
+                label={data?.category}
                 color="error"
                 size="small"
                 sx={{ px: 0.5 }}
@@ -110,10 +122,10 @@ export const BlogGrid = (props) => {
                     fontSize: "14px",
                   }}
                 >
-                  {props?.data?.signature[0]?.substring(0, 1)}
+                  {data?.signature[0]?.substring(0, 1)}
                 </Avatar>
                 <Typography variant="subtitle1" sx={{ color: "#696969" }}>
-                  By {props.ele.signature[0]} • {props.ele.createdAt}
+                  By {data?.signature[0]} • {data?.createdAt}
                 </Typography>
               </Box>
               <Box>
@@ -126,5 +138,7 @@ export const BlogGrid = (props) => {
         </Link>
       </Card>
     </Grid>
+  ) : (
+    <></>
   );
 };
