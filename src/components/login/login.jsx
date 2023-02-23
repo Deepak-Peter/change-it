@@ -71,7 +71,7 @@ function Login() {
                 localStorage.setItem("isLoggedIn", "user");
                 window.location.reload();
                 navigate("/home", { replace: true });
-              } else if (data.statusCode === 400) {
+              } else {
                 alert("Please enter correct username and password");
               }
             });
@@ -80,7 +80,7 @@ function Login() {
         localStorage.setItem("blogUser", user[0]);
         // postUser(regData);
       } catch (err) {
-        console.error(err);
+        alert("Please enter correct username and password");
       }
     },
   });
